@@ -38,6 +38,14 @@ ffmpeg -i XXX.mkv -vn -ar 44100 -ab 312k YYY.aac
 ffmpeg -i A1.mp4 -i A2.mp4 -c copy A3.mp4
 ```
 
+- **图片转WebP**
+
+```
+ffmpeg -i input.jpg -compression_level 6 -q 90 -preset drawing output.webp
+```
+
+> https://ffmpeg.org/ffmpeg-all.html#toc-Options-27   
+
 
 
 ## FFprobe

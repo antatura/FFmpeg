@@ -57,7 +57,7 @@ ffmpeg -i input.jpg -q 90 output.webp
 - GIF 转 Animated WebP
 
 ```
-ffmpeg -i input.gif -loop 0 -lossles 1 -y output.webp
+ffmpeg -i input.gif -vf scale=320:-1,fps=15 -loop 0 -lossles 1 -y output.webp
 ```
 
 ## FFprobe

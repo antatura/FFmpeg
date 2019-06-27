@@ -24,7 +24,15 @@ ffmpeg  -ss 00:00:18.000 -to 00:00:28.000 -i XXX.mp4 -c copy "D:\YYY.mp4"
 ffmpeg -f concat -i mylist.txt -c copy YYY.flv
 ```
 
-> <https://trac.ffmpeg.org/wiki/Concatenate>
+> <https://trac.ffmpeg.org/wiki/Concatenate>  
+
+- **批处理**
+
+```
+for %a in (*.mp4 *.flv) do ffmpeg -i "%a" -crf 20 "output\%~na_cfr-20.mp4"
+```
+
+> 先建立output文件夹；若要保存为.bat，则需将%替换为%%     
 
 - **提取音频**
 

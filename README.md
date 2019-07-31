@@ -60,6 +60,17 @@ ffmpeg -i input.jpg -q 90 output.webp
 ffmpeg -i input.gif -vf scale=320:-1,fps=15 -loop 0 -lossles 1 -y output.webp
 ```
 
+- **mp4 转 gif**
+
+```
+ffmpeg -i input.mp4 -vf fps=10,scale=480:-1 -loop 0 output.gif
+```
+
+高质量版:         
+```
+ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output1.gif
+```
+
 ## FFprobe
 
 * **查看视频Info**

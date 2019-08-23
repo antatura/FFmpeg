@@ -3,6 +3,10 @@
 
 ## FFmpeg
 
+示例：
+
+ffmpeg -ss 12 -to 24 -i input.mp4 -c:v libx264 -pix_fmt yuv420p -profile high -level 4.1 -crf 21.5 -preset 6 -x264-params keyint=123:min-keyint=20 -c:a copy output.mp4
+
 * **提取视频片段**
 
 ```

@@ -75,6 +75,18 @@ ffmpeg -i input.mp4 -vf fps=10,scale=480:-1 -loop 0 output.gif
 ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 output1.gif
 ```
 
+- **导出字幕**
+
+```
+ffmpeg -i 00905.m2ts -map 0:2 -c:s copy 02.sup
+```
+
+- **查询音量**
+
+```
+ffmpeg -i nfs.mp4 -af volumedetect -f null nul
+```
+
 ## FFprobe
 
 * **查看视频Info**
@@ -93,6 +105,11 @@ ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries fram
 
 ```
 ffprobe -i XXX.mkv -show_frames -read_intervals 01:25:31%+#1
+```
+
+- **输出每一帧的大小**
+```
+ffprobe -select_streams v -show_entries packet=size:stream=duration -of compact=p=0:nk=1 XXX.mp4 >bitrate.csv
 ```
 
 

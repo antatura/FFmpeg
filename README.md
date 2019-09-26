@@ -30,6 +30,12 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.flv
 
 > <https://trac.ffmpeg.org/wiki/Concatenate>  
 
+- **旋转视频方向**
+
+```
+ffmpeg -i XXX.mp4 -map_metadata 0 -metadata:s:v rotate="90" -c copy YYY.mp4
+```
+
 - **批处理**
 
 ```

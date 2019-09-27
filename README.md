@@ -37,7 +37,7 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.flv
 CPU
 
 ```
-ffmpeg -f gdigrab -r 30 -i desktop -crf 0 -preset 0 -level 62 YYY.mp4
+ffmpeg -f gdigrab -framerate 30 -i desktop -crf 0 -preset 0 -level 51 YYY.mp4
 ```
 
 GPU

@@ -43,7 +43,7 @@ ffmpeg -f gdigrab -r 30 -i desktop -crf 0 -preset 0 output.mkv
 GPU
 
 ```
-ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 output.mkv
+ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 -profile:v high -level 51 output.mkv
 ```
 
 - **旋转视频方向**

@@ -40,6 +40,10 @@ CPU
 ffmpeg -f gdigrab -framerate 30 -i desktop -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 
+```
+ffmpeg -thread_queue_size 512 -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" -qp 0 -preset 0 -level 51 YYY.mp4
+```
+
 GPU
 
 ```

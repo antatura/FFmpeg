@@ -30,6 +30,22 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.flv
 
 > <https://trac.ffmpeg.org/wiki/Concatenate>  
 
+- **录制桌面**
+
+> https://trac.ffmpeg.org/wiki/Capture/Desktop  
+
+CPU
+
+```
+ffmpeg -f gdigrab -framerate 30 -i desktop output.mkv
+```
+
+GPU
+
+```
+ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 output.mkv
+```
+
 - **旋转视频方向**
 
 ```

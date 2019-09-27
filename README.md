@@ -46,11 +46,12 @@ GPU
 ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 -profile:v high -level 51 output.mkv
 ```
 
-同时录制麦克风
+同时录制声音
 
 ```
-ffmpeg -list_devices true -f dshow -i dummy         
-ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="Microphone (High Definition Aud" -vcodec libx264 YYY.mp4      
+ffmpeg -list_devices true -f dshow -i dummy     
+ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="Microphone (High Def......" -vcodec libx264 YYY.mp4  
+ffmpeg -f gdigrab -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" Y.mp4
 ```
 
 - **旋转视频方向**

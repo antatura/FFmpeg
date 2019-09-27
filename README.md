@@ -50,8 +50,8 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 -profile:v high
 
 ```
 ffmpeg -list_devices true -f dshow -i dummy     
-ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="Microphone (High Def......" -vcodec libx264 YYY.mp4  
-ffmpeg -f gdigrab -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" Y.mp4
+ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="麦克风阵列 (Realtek(R) Audio)" YYY.mp4  
+ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" YYY.mp4
 ```
 
 - **旋转视频方向**

@@ -115,6 +115,12 @@ ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]pal
 ffmpeg -i 00905.m2ts -map 0:2 -c:s copy 02.sup
 ```
 
+- **烧制字幕**
+
+```
+ffmpeg -i XXX.mp4 -vf subtitles=XXX.ass -preset 0 -CRF 34 YYY.MP4
+```
+
 - **查询音量**
 
 ```

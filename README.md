@@ -5,7 +5,7 @@
 
 示例：
 
-ffmpeg -ss 02:30 -t 75 -i XXX.mp4 -crf 18 -preset 8 -tune animation -profile:v high -level 51 -pix_fmt yuv420p -refs 4 -bf 6 -r 30 -s 1440x1080 -g 290 -keyint_min 1 -fast-pskip 0 -me_method umh -me_range 32 -subq 10 -aq-mode 2 -aq-strength 0.9 -trellis 2 -psy-rd 0.8:0.05 -ar 48000 -ab 128k -ac 2 -c:a aac -af loudnorm -max_muxing_queue_size 2222 YYY.mp4
+ffmpeg -ss 02:30 -t 75 -i XXX.mp4 -crf 18 -preset 8 -tune animation -profile:v high -level 51 -pix_fmt yuv420p -refs 4 -bf 6 -r 30 -s 1440x1080 -g 290 -keyint_min 1 -fast-pskip 0 -me_method umh -me_range 32 -subq 10 -aq-mode 2 -aq-strength 0.9 -trellis 2 -psy-rd 0.8:0.05 -ar 48000 -ab 128k -ac 2 -c:a aac -af loudnorm -max_muxing_queue_size 512 YYY.mp4
 
 * **提取视频片段**
 

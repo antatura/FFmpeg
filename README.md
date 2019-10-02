@@ -133,6 +133,10 @@ ffmpeg -i nfs.mp4 -af volumedetect -f null nul
 ffmpeg -ss 10 -i XXX.mp4 -frames:v 1 YYY.png
 ```
 
+```
+ffmpeg -ss 10.123 -i XXX.mp4 -frames:v 9 YYY_%03d.png
+```
+
 ## FFprobe
 
 * **查看视频Info**

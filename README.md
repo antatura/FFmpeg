@@ -139,12 +139,6 @@ ffmpeg -i XXX.mp4 -vf subtitles=XXX.ass -preset 0 -CRF 34 YYY.MP4
 ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:fontsize=30:fontcolor=white:borderw=3:bordercolor=black" YYY.mp4
 ```
 
-- **添加图片水印**
-
-```
-ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
-```
-
 计时器
 
 ```
@@ -152,6 +146,12 @@ ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize
 ```
 
 [效果图](https://i.loli.net/2019/10/02/B8NfrWOpSjwFVc2.png)
+
+- **添加图片水印**
+
+```
+ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
+```
 
 右上：overlay=W-w-20:20  
 右下：overlay=W-w-20:H-h-20  

@@ -133,6 +133,29 @@ ffmpeg -i 00905.m2ts -map 0:2 -c:s copy 02.sup
 ffmpeg -i XXX.mp4 -vf subtitles=XXX.ass -preset 0 -CRF 34 YYY.MP4
 ```
 
+- **添加文字水印**
+
+```
+ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:fontsize=30:fontcolor=white:borderw=3:bordercolor=black" YYY.mp4
+```
+
+- **添加图片水印**
+
+```
+ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
+```
+
+计时器
+
+```
+ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=72:fontcolor='white':timecode='00\:00\:00\:00':rate=30:text='TCR\:':boxcolor=0x000000AA:box=1:x=860-text_w/2:y=960" YYY.mp4
+```
+
+右上：overlay=W-w-20:20  
+右下：overlay=W-w-20:H-h-20  
+左下：overlay=20:H-h-20  
+居中：overlay=(W-w)/2:(H-h)/2  
+
 - **查询音量**
 
 ```

@@ -151,6 +151,8 @@ ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
 ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=72:fontcolor='white':timecode='00\:00\:00\:00':rate=30:text='TCR\:':boxcolor=0x000000AA:box=1:x=860-text_w/2:y=960" YYY.mp4
 ```
 
+[效果图](https://i.loli.net/2019/10/02/B8NfrWOpSjwFVc2.png)
+
 右上：overlay=W-w-20:20  
 右下：overlay=W-w-20:H-h-20  
 左下：overlay=20:H-h-20  

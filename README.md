@@ -64,6 +64,12 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (R
 ffmpeg -i XXX.mp4 -map_metadata 0 -metadata:s:v rotate="90" -c copy YYY.mp4
 ```
 
+- **调整画面大小**
+
+```
+ffmpeg -i XXX.mp4 -vf scale=2160:-2 -preset 2 YYY.mp4
+```
+
 - **裁切视频**
 
 ```

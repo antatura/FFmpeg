@@ -130,7 +130,9 @@ ffmpeg -i 00905.m2ts -map 0:2 -c:s copy 02.sup
 - **烧制字幕**
 
 ```
-ffmpeg -i XXX.mp4 -vf subtitles=XXX.ass -preset 0 -CRF 34 YYY.MP4
+ffmpeg -i XXX.mp4 -vf subtitles=XXX.srt -preset 0 -CRF 34 YYY.MP4
+
+ffmpeg -i XXX.mp4 -vf ass=XXX.ass -preset 0 -CRF 34 YYY.MP4
 ```
 
 - **添加文字水印**

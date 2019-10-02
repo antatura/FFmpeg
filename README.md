@@ -127,6 +127,12 @@ ffmpeg -i XXX.mp4 -vf subtitles=XXX.ass -preset 0 -CRF 34 YYY.MP4
 ffmpeg -i nfs.mp4 -af volumedetect -f null nul
 ```
 
+- **导出图片**
+
+```
+ffmpeg -ss 10 -i XXX.mp4 -frames:v 1 YYY.png
+```
+
 ## FFprobe
 
 * **查看视频Info**

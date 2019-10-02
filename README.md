@@ -149,6 +149,11 @@ ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize
 
 [效果图](https://i.loli.net/2019/10/02/B8NfrWOpSjwFVc2.png)
 
+- **周期性显示文字水印（周期1.6s，显示0.8s）：**
+```
+ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='test0test':x=100:y=100:enable=lt(mod(t\,1.6)\,0.8):fontsize=30:fontcolor=blue" -y YYY.mp4
+```
+
 - **添加图片水印**
 
 ```
@@ -159,6 +164,22 @@ ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
 右下：overlay=W-w-20:H-h-20  
 左下：overlay=20:H-h-20  
 居中：overlay=(W-w)/2:(H-h)/2  
+
+- **添加覆盖动画（从t=5s开始，速度400，位置正中）：**
+
+```
+ffmpeg -i XXX.mp4 -i XXX.png -filter_complex "overlay='if(gte(t,5), -w+(t-5)*400, NAN)':(H-h)/2" -preset 0 -y YYY.mp4
+```
+
+- **添加Gif图片水印：**
+```
+ffmpeg -i XX.mp4 -ignore_loop 0 -i XXX.gif -filter_complex overlay=20:20:shortest=1 -preset 0 -y YY.mp4
+```
+
+- **跑马灯：**
+```
+ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*400, NAN)':y=0" -s 1920x1080 -preset 0 -y YYY.mp4
+```
 
 - **查询音量**
 

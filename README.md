@@ -146,7 +146,7 @@ ffmpeg -ss 10 -i XXX.mp4 -frames:v 1 YYY.png
 ```
 
 ```
-ffmpeg -ss 10.123 -i XXX.mp4 -frames:v 9 YYY_%03d.png
+ffmpeg -ss 10.123 -i XXX.mp4 -frames:v 9 YYY_%3d.png
 ```
 
 ## FFprobe

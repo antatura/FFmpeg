@@ -159,7 +159,7 @@ ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='test0test':x=100:y=100:enabl
 - **添加图片水印**
 
 ```
-ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20 -preset 0 YYY.mp4
+ffmpeg -i XXX.mp4 -i XXX.png -filter_complex overlay=20:20:enable='between(t,10,16)' -preset 0 YYY.mp4
 ```
 
 右上：overlay=W-w-20:20  

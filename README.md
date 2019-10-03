@@ -50,6 +50,8 @@ GPU
 ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 -profile:v high -level 51 output.mkv
 ```
 
+> GPU录制：总功耗46w；CPU录制：总功耗25w；皆无法正常录制60帧
+
 同时录制声音
 
 ```

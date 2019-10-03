@@ -113,7 +113,7 @@ ffmpeg -i input.gif -vf scale=320:-1,fps=15 -loop 0 -lossles 1 -y output.webp
 - **mp4 转 gif**
 
 ```
-ffmpeg -i input.mp4 -vf fps=10,scale=480:-1 -loop 0 output.gif
+ffmpeg -ss 5 -t 10 -i input.mp4 -vf fps=10,scale=480:-2 -loop 0 output.gif
 ```
 
 高质量版:         

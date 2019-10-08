@@ -40,6 +40,7 @@ ffmpeg -i XXX.mkv -vn -ar 44100 -ab 312k YYY.aac
 ```
 ffmpeg -i A1.mp4 -i A2.mp4 -c copy A3.mp4
 ```
+> 合并后时长取较长段。若视频较长，则后半段音量为零；若音频较长，则后半段为视频的最后一帧。
 
 - **合并多条视频分段**
 

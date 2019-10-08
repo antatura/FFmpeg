@@ -191,6 +191,14 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 ffmpeg -i nfs.mp4 -af volumedetect -f null nul
 ```
 
+- **正常化音量大小**
+
+```
+ffmpeg-normalize audio.m4a -c:a aac -ar 48000 -b:a 180k -o YYY.m4a
+```
+
+> https://github.com/slhck/ffmpeg-normalize
+
 - **调节音量（10~16s音量为150%）**
 
 ```

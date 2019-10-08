@@ -34,6 +34,11 @@ ffmpeg  -ss 00:00:18.000 -to 00:00:28.000 -i XXX.mp4 -c copy "D:\YYY.mp4"
 ```
 ffmpeg -i XXX.mkv -vn -ar 44100 -ab 312k YYY.aac
 ```
+- **分离视频流与音频流**
+
+```
+ffmpeg -i input.mkv -map 0:1 -map 0:2 audios_only.mkv -map 0:0 video_only.mkv
+```
 
 - **合并视频与音频**
 

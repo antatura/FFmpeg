@@ -37,7 +37,7 @@ ffmpeg -i XXX.mkv -vn -ar 44100 -ab 312k YYY.aac
 - **分离视频流与音频流**
 
 ```
-ffmpeg -i input.mkv -map 0:1 -map 0:2 audios_only.mkv -map 0:0 video_only.mkv
+ffmpeg -i input.mkv -map 0:1 -map 0:2 -c copy audios_only.mkv -map 0:0 -c copy video_only.mkv
 ```
 
 - **合并视频与音频**

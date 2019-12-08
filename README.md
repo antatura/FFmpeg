@@ -72,7 +72,7 @@ ffmpeg -i XXX.mp4 -vf scale=2160:-2 -preset 2 YYY.mp4
 - **裁切视频**
 
 ```
-ffmpeg -i XXX.mp4 -vf crop=out_w:out_h:x:y YYY.mp4
+ffmpeg -i XXX.mp4 -vf crop=w:h:x:y YYY.mp4
 ```
 
 - **录制桌面**

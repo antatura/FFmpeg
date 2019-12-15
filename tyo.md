@@ -6,7 +6,8 @@
 |   -vf<br />-filter:v   |           subtitles=input.srt           |                           烧制字幕                           |
 |           -h           | encoder=libx264<br />encoder=h264_nvenc |        查阅编码器帮助信息<br />详见：ffmpeg -encoders        |
 |      -write_tmcd       |                    0                    | 解决错误：Stream #0:2(eng): <br />Data: none (tmcd / 0x64636D74)<br/>          handler_name: Apple Video Media Handler<br/>      timecode: 00:00:00:00<br/>Unsupported codec with id 0 for input stream 2 |
-|                        |                                         |                                                              |
+|     -map_chapters      |                   -1                    |                         剥离章节信息                         |
+|     -map_metadata      |                   -1                    |                          剥离元数据                          |
 |                        |                                         |                                                              |
 |           8            |                    8                    |                              9                               |
 

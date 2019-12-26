@@ -210,6 +210,8 @@ ffmpeg-normalize audio.m4a -c:a aac -ar 48000 -b:a 180k -o YYY.m4a
 ffmpeg -i XXX.mp4 -c:v copy -af volume=1.5:enable='between(t,10,16)' YYY.mp4
 ```
 
+> Volume与CRF算法相似，volume=0.5 相当于 volume=-6dB
+
 - **导出图片**
 
 ```

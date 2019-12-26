@@ -196,6 +196,8 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 ffmpeg -i nfs.mp4 -af volumedetect -f null nul
 ```
 
+> mean_volume: -26.2 dB 相当于 EBU R.128: -23 LUFS
+
 - **正常化音量大小**
 
 ```

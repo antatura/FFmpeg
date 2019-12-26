@@ -230,6 +230,12 @@ ffmpeg -ss 10.123 -i XXX.mp4 -frames:v 9 YYY_%3d.png
 ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -c:v libx264 -pix_fmt yuv420p -qp 0 -preset 0 YYY.mp4
 ```
 
+- **HEVC.4K.HDR.10bit >>> x264.1080p.SDR.8bit**
+
+```
+-vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,zscale=1920:-2
+```
+
 ## FFprobe
 
 * **查看视频Info**

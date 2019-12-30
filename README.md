@@ -156,6 +156,8 @@ ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:font
 ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=72:fontcolor='white':timecode='00\:00\:00\:00':rate=30:text='TCR\:':boxcolor=0x000000AA:box=1:x=860-text_w/2:y=960" YYY.mp4
 ```
 
+> rate=video fps
+
 [效果图](https://i.loli.net/2019/10/02/B8NfrWOpSjwFVc2.png)
 
 - **周期性显示文字水印（周期1.6s，显示0.8s）：**

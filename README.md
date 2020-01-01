@@ -276,9 +276,11 @@ metaflac --remove-all XXX.flac
 metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.flac
 ```
 
+[FlacTags.txt](https://github.com/antatura/FFmpeg/blob/master/Examples/FlacTags.txt)
+
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
-> https://xiph.org/vorbis/doc/v-comment.html
+[Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
 
 
 

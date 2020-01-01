@@ -276,7 +276,7 @@ metaflac --remove-all XXX.flac
 metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.flac
 ```
 
-[FlacTags.txt](https://github.com/antatura/FFmpeg/blob/master/Examples/FlacTags.txt)
+[FlacTags.txt](https://github.com/antatura/FFmpeg/blob/master/Examples/FlacTags.txt) (ANSI编码)
 
 > https://xiph.org/flac/documentation_tools_metaflac.html
 

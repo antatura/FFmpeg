@@ -264,6 +264,29 @@ ffprobe -select_streams v -show_entries packet=size:stream=duration -of compact=
 ```
 
 
-
 ## FFplay 
+
+## metaflac
+
+- **编辑FLAC元数据与封面**
+
+```
+metaflac --remove-all XXX.flac
+
+metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.flac
+```
+
+> https://xiph.org/flac/documentation_tools_metaflac.html
+
+> https://xiph.org/vorbis/doc/v-comment.html
+
+
+
+
+
+
+
+
+
+
 

@@ -239,7 +239,7 @@ ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -c:v libx264 -pix_fmt yuv420p -qp 
 
 - **加速 减速 视频 音频**
 
-ffmpeg -i 60fps.mp4 -af atempo=2.0 -vf setpts=2.0*PTS -r 30 30fps.mp4
+ffmpeg -i 60fps.mp4 -af atempo=0.5 -vf setpts=2.0*PTS -r 30 30fps.mp4
 
 > https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
 

@@ -132,7 +132,7 @@ ffmpeg -i input.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]pal
 - **导出字幕**
 
 ```
-ffmpeg -i 00905.m2ts -map 0:2 -c:s copy 02.sup
+ffmpeg -i XXX.m2ts -map 0:2 -c:s copy 02.sup
 ```
 
 - **烧制字幕**
@@ -194,7 +194,7 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 - **查询音量**
 
 ```
-ffmpeg -i nfs.mp4 -af volumedetect -f null nul
+ffmpeg -i XXX.mp4 -af volumedetect -f null nul
 ```
 
 > mean_volume: -26.2 dB 相当于 EBU R.128: -23 LUFS
@@ -236,6 +236,12 @@ ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -c:v libx264 -pix_fmt yuv420p -qp 
 ```
 -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,zscale=1920:-2
 ```
+
+- **加速 减速 视频 音频**
+
+ffmpeg -i 60fps.mp4 -af atempo=2.0 -vf setpts=2.0*PTS -r 30 30fps.mp4
+
+> https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
 
 ## FFprobe
 

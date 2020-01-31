@@ -86,7 +86,7 @@ ffmpeg -i XXX.mp4 -vf crop=w:h:x:y YYY.mp4
 CPU
 
 ```
-ffmpeg -y -probesize 64M -f gdigrab -framerate 30 -i desktop -r 30 -qp 0 -preset 0 -level 51 YYY.mp4
+ffmpeg -y -probesize 64M -f gdigrab -framerate 30 -i desktop -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 
 ```

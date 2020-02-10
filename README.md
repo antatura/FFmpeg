@@ -271,8 +271,15 @@ ffprobe -i XXX.mkv -show_frames -read_intervals 01:25:31%+#1
 ```
 
 - **输出每一帧的大小**
+
 ```
 ffprobe -select_streams v -show_entries packet=size:stream=duration -of compact=p=0:nk=1 XXX.mp4 >bitrate.csv
+```
+
+- **为MP3导入元数据和封面**
+
+```
+ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_id3v1 1 -metadata title="世界中の谁よりきっと~Album Version~" -metadata artist="WANDS" -metadata album="SINGLES COLLECTION +6" -metadata comment="Cover (front)" YYY.mp3
 ```
 
 

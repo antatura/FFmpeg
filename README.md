@@ -242,7 +242,7 @@ ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -c:v libx264 -pix_fmt yuv420p -qp 
 -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,zscale=1920:-2
 ```
 
-- **加速 减速 视频 音频**
+- **(加速) 减速视频和音频**
 
 ```
 ffmpeg -i 60fps.mp4 -af atempo=0.5 -vf setpts=2.0*PTS -r 30 30fps.mp4

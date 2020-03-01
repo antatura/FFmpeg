@@ -222,7 +222,7 @@ ffmpeg -i XXX.mp4 -c:v copy -af volume=1.5:enable='between(t,10,16)' YYY.mp4
 
 - **绘制音频波形图**
 
-[【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)
+[【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/output.png)
 
 ```
 ffmpeg -i input -filter_complex "showwavespic=s=1600x600:split_channels=1" -frames:v 1 output.png

@@ -220,6 +220,16 @@ ffmpeg -i XXX.mp4 -c:v copy -af volume=1.5:enable='between(t,10,16)' YYY.mp4
 
 > Volume与CRF算法相似，volume=0.5 相当于 volume=-6dB
 
+- **绘制音频频谱**
+
+[【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)
+
+```
+ffmpeg -i XXX.aac -lavfi showspectrumpic=s=1766x1024:mode=separate spectrogram.png
+```
+
+> 高度需为2的幂  
+
 - **导出图片**
 
 ```

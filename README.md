@@ -238,7 +238,13 @@ ffmpeg -i input -filter_complex "showwavespic=s=1600x600:split_channels=1" -fram
 ffmpeg -i XXX.aac -lavfi showspectrumpic=s=1766x1024:mode=separate spectrogram.png
 ```
 
-> 高度需为2的幂  
+> 高度需为2的幂次方
+
+- **本地aac高质量编码**
+
+```
+ffmpeg -i XXX.aac -ar 48000 -b:a 256k -aac_coder 1 -strict -2 -cutoff 24000 YYY.aac
+```
 
 - **导出图片**
 

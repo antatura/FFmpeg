@@ -220,6 +220,16 @@ ffmpeg -i XXX.mp4 -c:v copy -af volume=1.5:enable='between(t,10,16)' YYY.mp4
 
 > Volume与CRF算法相似，volume=0.5 相当于 volume=-6dB
 
+- **绘制音频波形图**
+
+[【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)
+
+```
+ffmpeg -i input -filter_complex "showwavespic=s=1600x600:split_channels=1" -frames:v 1 output.png
+```
+
+> https://trac.ffmpeg.org/wiki/Waveform
+
 - **绘制音频频谱**
 
 [【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)

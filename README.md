@@ -284,16 +284,22 @@ ffmpeg -i 60fps.mp4 -af atempo=0.5 -vf setpts=2.0*PTS -r 30 30fps.mp4
 ffprobe -v error -show_format -show_streams XXX.mp4
 ```
 
+- **输出每一帧的 time, size, type**
+
+```
+ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time,pkt_size,pict_type -of csv=p=0 XXX.mp4 >XXX.csv
+```
+
 - **获取所有关键帧** 
 
 ```
-ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
+ffprobe -loglevel error -select_streams v:0 -skip_frame nokey -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
 ```
 
-- **获取帧时、帧类型并计数**
+- **关键帧计数**
 
 ```
-ffprobe -v error -count_frames -skip_frame none -select_streams v:0 -show_entries frame=pkt_pts_time,pict_type:stream=nb_read_frames -of csv=p=0 XXX.mp4
+ffprobe -v error -count_frames -select_streams v:0 -skip_frame nokey -show_entries stream=nb_read_frames -of default=nokey=1:noprint_wrappers=1 XXX.mp4
 ```
 
 `-skip_frame nokey`: Keyframes
@@ -308,12 +314,6 @@ ffprobe -v error -count_frames -skip_frame none -select_streams v:0 -show_entrie
 
 ```
 ffprobe -i XXX.mkv -show_frames -read_intervals 01:25:31%+#1
-```
-
-- **输出每一帧的 time, size, type**
-
-```
-ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time,pkt_size,pict_type -of csv=p=0 XXX.mp4 >XXX.txt
 ```
 
 - **为MP3导入元数据和封面**

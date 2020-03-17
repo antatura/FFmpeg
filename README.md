@@ -290,6 +290,20 @@ ffprobe -v error -show_format -show_streams XXX.mp4
 ffprobe -loglevel error -skip_frame nokey -select_streams v:0 -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
 ```
 
+- **获取帧时、帧类型并计数**
+
+```
+ffprobe -v error -count_frames -skip_frame none -select_streams v:0 -show_entries frame=pkt_pts_time,pict_type:stream=nb_read_frames -of csv=p=0 XXX.mp4
+```
+
+`-skip_frame nokey`: Keyframes
+
+`-skip_frame nointra`: I frames
+
+`-skip_frame bidir`: except B frames
+
+> https://stackoverflow.com/questions/2017843/fetch-frame-count-with-ffmpeg
+
 - **获取01:25:31前一个关键帧**
 
 ```

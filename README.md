@@ -310,10 +310,10 @@ ffprobe -v error -count_frames -skip_frame none -select_streams v:0 -show_entrie
 ffprobe -i XXX.mkv -show_frames -read_intervals 01:25:31%+#1
 ```
 
-- **输出每一帧的大小**
+- **输出每一帧的 time, size, type**
 
 ```
-ffprobe -select_streams v -show_entries packet=size:stream=duration -of compact=p=0:nk=1 XXX.mp4 >bitrate.csv
+ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time,pkt_size,pict_type -of csv=p=0 XXX.mp4 >XXX.txt
 ```
 
 - **为MP3导入元数据和封面**

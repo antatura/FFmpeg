@@ -272,9 +272,20 @@ ffmpeg -i 60fps.mp4 -af atempo=0.5 -vf setpts=2.0*PTS -r 30 30fps.mp4
 
 > https://trac.ffmpeg.org/wiki/How%20to%20speed%20up%20/%20slow%20down%20a%20video
 
+- **编码为Prores**
+
+`ffmpeg -h encoder=prores_ks`
+
+```
+ffmpeg -i XXX.mp4 -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -c:a pcm_s16le YYY.mov
+```
+
+> https://video.stackexchange.com/questions/14712/how-to-encode-apple-prores-on-windows-or-linux  
+> https://trac.ffmpeg.org/wiki/Encode/VFX
+
 ## FFprobe
 
-* **查看视频Info**
+- **查看视频Info**
 
 ```
 ffprobe -v error -show_format -show_streams XXX.mp4

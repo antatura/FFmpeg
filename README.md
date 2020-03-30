@@ -281,7 +281,8 @@ ffmpeg -i XXX.mp4 -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -c:a pcm_s16
 ```
 
 > https://video.stackexchange.com/questions/14712/how-to-encode-apple-prores-on-windows-or-linux  
-> https://trac.ffmpeg.org/wiki/Encode/VFX
+> https://trac.ffmpeg.org/wiki/Encode/VFX  
+> 相比于prores_ks, prores牺牲了压缩率提升了编码速度（profile:v也适用于prores）
 
 ## FFprobe
 

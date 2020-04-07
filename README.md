@@ -28,12 +28,6 @@ ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy "D:\YYY.mp4"
 
 > 快速寻址；从上一关键帧开始裁切 17.345s~28.000s
 
-```
-ffmpeg -i XXX.mp4 -ss 00:00:18.000 -to 28 -c copy "D:\YYY.mp4"
-```
-
-> 慢速寻址；从下一关键帧开始裁切 18.678s~28.000s
-
 > https://trac.ffmpeg.org/wiki/Seeking     
 
 |                          |               优点                |                     缺点                      |

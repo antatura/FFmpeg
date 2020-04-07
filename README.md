@@ -23,7 +23,7 @@ for %a in (*.mp4 *.flv) do ffmpeg -i "%a" -crf 20 "output\%~na_cfr-20.mp4"
 * **提取视频片段**
 
 ```
-ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 24 -c copy "D:\YYY.mp4"
+ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy "D:\YYY.mp4"
 ```
 
 > https://trac.ffmpeg.org/wiki/Seeking     

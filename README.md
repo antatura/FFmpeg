@@ -233,7 +233,7 @@ ffmpeg -i input -filter_complex "showwavespic=s=1600x600:split_channels=1" -fram
 [【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)
 
 ```
-ffmpeg -i XXX.aac -lavfi showspectrumpic=s=1766x1024:mode=separate:color=terrain spectrogram.png
+ffmpeg -i XXX.aac -lavfi showspectrumpic=s=1764x1024:mode=separate:color=terrain spectrogram.png
 ```
 
 https://ffmpeg.org/ffmpeg-filters.html#toc-showspectrumpic

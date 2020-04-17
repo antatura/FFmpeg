@@ -200,12 +200,18 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 ffmpeg -i XXX.mp4 -af volumedetect -f null nul
 ```
 
-> mean_volume: -26.2 dB 相当于 EBU R.128: -23 LUFS
+> 【不准确】mean_volume: -26.2 dB 相当于 EBU R.128: -23 LUFS
+
+【准确版】:
+
+```
+ffmpeg-normalize xxx.wav -p -n
+```
 
 - **正常化音量大小**
 
 ```
-ffmpeg-normalize audio.m4a -c:a aac -ar 48000 -b:a 180k -o YYY.m4a
+ffmpeg-normalize audio.m4a -t -17 -o output.wav
 ```
 
 > https://github.com/slhck/ffmpeg-normalize

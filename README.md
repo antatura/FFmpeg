@@ -211,7 +211,7 @@ ffmpeg-normalize xxx.wav -p -n
 - **正常化音量大小**
 
 ```
-ffmpeg-normalize audio.m4a -t -17 -o output.wav
+ffmpeg-normalize audio.m4a -t -17 -tp -1 -lrt 15 -o output.wav
 ```
 
 > https://github.com/slhck/ffmpeg-normalize
@@ -229,7 +229,7 @@ ffmpeg -i XXX.mp4 -c:v copy -af volume=1.5:enable='between(t,10,16)' YYY.mp4
 [【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/output.png)
 
 ```
-ffmpeg -i input -filter_complex "showwavespic=s=1600x600:split_channels=1" -frames:v 1 output.png
+ffmpeg -i XXX.wav -filter_complex "showwavespic=s=1920x1080:split_channels=1" -frames:v 1 YYY.png
 ```
 
 > https://trac.ffmpeg.org/wiki/Waveform

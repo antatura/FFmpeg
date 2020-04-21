@@ -196,17 +196,23 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 
 - **查询音量**
 
+【RMS】:
+
 ```
 ffmpeg -i XXX.mp4 -af volumedetect -f null nul
 ```
 
-> 【不准确】mean_volume: -26.2 dB 相当于 EBU R.128: -23 LUFS
-
-【准确版】:
+【EBU R128】:
 
 ```
 ffmpeg-normalize xxx.wav -p -n
 ```
+
+```
+ffmpeg -hide_banner -i XXX.m4a -filter_complex ebur128=peak=true:framelog=verbose -f null -
+```
+
+> https://ffmpeg.org/ffmpeg-filters.html#toc-ebur128-1
 
 - **正常化音量大小**
 

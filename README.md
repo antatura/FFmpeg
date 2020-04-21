@@ -42,6 +42,17 @@ ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy "D:\YYY.mp4"
 ffmpeg -i input.mkv -map 0:1 -map 0:2 -c copy audios_only.mkv -map 0:0 -c copy video_only.mkv
 ```
 
+- **循环流**
+
+```
+ffmpeg -stream_loop 3 -i my.wav -c copy my_x4.wav
+```
+
+`
+-stream_loop number (input)  
+Set number of times input stream shall be looped. Loop 0 means no loop, loop -1 means infinite loop.  
+`
+
 - **合并视频与音频**
 
 ```

@@ -1,4 +1,4 @@
-# Requirements:ffprobe.exe, matplotlib, numpy
+# Requirements: ffprobe.exe, matplotlib, numpy
 
 
 import subprocess

@@ -84,7 +84,7 @@ plt.axhline(y=maxi,color='r',lw=2,ls='--',label='max: '+str(maxi))
 plt.axhline(y=mean,color='g',lw=2,ls='--',label='mean: '+str(mean))
 plt.axvline(x=ax0,color='y',lw=2.5,ls=':')
 plt.axvline(x=end,color='y',lw=2.5,ls=':')
-plt.legend(prop={'size': 18})
+plt.legend(prop={'size': 16})
 plt.show()
 
         

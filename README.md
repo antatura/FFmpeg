@@ -15,7 +15,7 @@
 Nvidia GPU NVENC 编码
 
 ```
-ffmpeg -ss 18 -c:v h264_cuvid -i XXX.mp4 -c:v h264_nvenc -profile:v high -preset slow -t 10 -qp 16 -init_qpP 18 -init_qpB 20 -bf 4 -b_ref_mode 2 YYY.mp4
+ffmpeg -ss 18 -c:v h264_cuvid -i XXX.mp4 -c:v h264_nvenc -profile:v high -preset slow -t 10 -qp 16 -bf 4 YYY.mp4
 ```
 
 - **批处理**

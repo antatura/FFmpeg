@@ -219,7 +219,7 @@ ffmpeg-normalize xxx.wav -p -n
 ```
 
 ```
-ffmpeg -hide_banner -i XXX.mp4 -map a:0 -filter_complex ebur128=peak=true:framelog=verbose -f null -
+ffmpeg -hide_banner -i XXX.mp4 -map a:0 -af ebur128=peak=true:framelog=verbose -f null -
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#toc-ebur128-1

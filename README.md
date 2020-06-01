@@ -12,6 +12,12 @@
 -r 60 -g 590 -keyint_min 1 -refs 13 -rc-lookahead 160 -fast-pskip 0 -crf 18 -preset 8 -tune film
 ```
 
+Nvidia GPU NVENC 编码
+
+```
+ffmpeg -c:v h264_cuvid -i XXX.mp4 -c:v h264_nvenc -profile:v high -preset slow -qp 16 YYY.mp4
+```
+
 - **批处理**
 
 ```

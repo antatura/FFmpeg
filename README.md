@@ -20,6 +20,8 @@ ffmpeg -y -stats -v 24 -ss 5 -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 -t 8 -an -
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC
 
+> https://devblogs.nvidia.com/nvidia-ffmpeg-transcoding-guide/
+
 - **批处理**
 
 ```

@@ -285,7 +285,11 @@ ffmpeg -ss 10 -i XXX.mp4 -frames:v 1 YYY.png
 ```
 
 ```
-ffmpeg -ss 10.123 -i XXX.mp4 -frames:v 9 YYY_%3d.png
+ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 YYY_%3d.png
+```
+
+```
+ffmpeg -framerate 30 -i YYY_%3d.png -c copy YYY.mkv
 ```
 
 - **创建仅包含图像的视频：**

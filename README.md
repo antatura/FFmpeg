@@ -100,6 +100,7 @@ ffmpeg -i XXX.mp4 -vf crop=w:h:x:y YYY.mp4
 - **录制桌面**
 
 > https://trac.ffmpeg.org/wiki/Capture/Desktop  
+> https://ffmpeg.org/ffmpeg-devices.html#gdigrab
 
 CPU
 

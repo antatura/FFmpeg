@@ -375,6 +375,14 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 
 ## FFplay 
 
+## **视频差值对比**
+
+```
+ffplay -f lavfi "movie=XXX.mp4[a];movie=YYY.mp4[b];[a][b]blend=all_mode=difference,hue=h=90"
+```
+
+> https://ffmpeg.org/ffmpeg-filters.html#blend-1
+
 ## metaflac
 
 - **编辑FLAC元数据与封面**

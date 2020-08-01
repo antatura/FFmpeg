@@ -399,6 +399,14 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 
 [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
 
+## Powershell x FFmpeg
+
+- **Powershell生成缩略图**
+
+```
+$file=Read-Host "Enter File"; $d=[double](ffprobe -v 24 -show_entries format=duration -of csv=p=0 $file)-[double](ffprobe -v 24 -show_entries format=start_time -of csv=p=0 $file); for ( $E=1; $E -le 5; $E++ ) { $ss=$E*$d/6; ffmpeg -y -v 24 -ss $ss -i $file -frames:v 1 "tmp_$E.png" }; ffmpeg -y -v 24 -i tmp_%d.png -vf scale=1920:-2,tile=1x5:padding=32 otpt.png; del tmp_*.png; start .\otpt.png
+```
+
 
 
 

@@ -8,6 +8,6 @@
 |      -write_tmcd       |                    0                    | 解决错误：Stream #0:2(eng): <br />Data: none (tmcd / 0x64636D74)<br/>          handler_name: Apple Video Media Handler<br/>      timecode: 00:00:00:00<br/>Unsupported codec with id 0 for input stream 2 |
 |     -map_chapters      |                   -1                    |                         剥离章节信息                         |
 |     -map_metadata      |                   -1                    |                          剥离元数据                          |
-|                        |                                         |                                                              |
-|           8            |                    8                    |                              9                               |
+|   -output_ts_offset    |                    -                    |                          时间戳补偿                          |
+|           -            |                    -                    |                              -                               |
 

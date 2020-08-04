@@ -1,5 +1,5 @@
-# Requirements: ffprobe.exe, matplotlib, numpy
-# Only v:0 of a media file
+# Requirements: FFprobe, Python, matplotlib, numpy
+# References: https://github.com/zeroepoch/plotbitrate
 
 import subprocess
 import argparse

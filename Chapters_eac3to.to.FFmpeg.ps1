@@ -1,6 +1,7 @@
 ﻿
-$cpt = Read-Host -Prompt 'Input Chapter Text'
-$vdo = Read-Host -Prompt 'Input Video File'
+Write-Host 'Example: Chapters_eac3to.to.FFmpeg.ps1 chapters.txt 0002.m2ts' -ForegroundColor DarkMagenta
+$cpt = $args[0]
+$vdo = $args[1]
 $gc = Get-Content $cpt
 Add-Content "$cpt.ffmd" ";FFMETADATA1"
 

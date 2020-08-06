@@ -173,10 +173,10 @@ ffmpeg -i XXX.mp4 -vf ass=XXX.ass -preset 0 -CRF 34 YYY.MP4
 ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:fontsize=30:fontcolor=white:borderw=3:bordercolor=black" YYY.mp4
 ```
 
-- **添加计时器水印**
+- **生成单色视频并添加计时器水印**
 
 ```
-ffmpeg -i XXX.mp4 -vf "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=72:fontcolor='white':timecode='00\:00\:00\:00':rate=30:text='TCR\:':boxcolor=0x000000AA:box=1:x=860-text_w/2:y=960" YYY.mp4
+ffmpeg -hide_banner -y -f lavfi -i "color=c=0x0000ff:s=1920x1080:r=10,drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=72:fontcolor='white':timecode='00\:00\:00\:00':rate=10:text='TCR\:':boxcolor=0x000000AA:box=1:x=860-text_w/2:y=960" -t 14 YYY.mp4
 ```
 
 > rate=video fps

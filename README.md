@@ -15,7 +15,7 @@
 Nvidia GPU NVENC 编码
 
 ```
-ffmpeg -y -stats -v 24 -ss 5 -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 -t 8 -an -r 60 -g 300 -keyint_min 1 -c:v h264_nvenc -preset slow -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -spatial_aq 1 -aq-strength 10 -temporal_aq 1 -qp 16 YYY.mp4
+ffmpeg -y -stats -v 24 -ss 5 -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 -t 8 -an -r 60 -g 300 -keyint_min 1 -c:v h264_nvenc -preset slow -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -qp 16 YYY.mp4
 ```
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC

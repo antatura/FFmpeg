@@ -15,8 +15,10 @@
 Nvidia GPU NVENC 编码
 
 ```
-ffmpeg -y -stats -v 24 -ss 5 -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 -t 8 -an -level 52 -r 60 -g 300 -keyint_min 1 -b:v 0 -bufsize 0 -c:v h264_nvenc -preset slow -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -qp 16 YYY.mp4
+ffmpeg -y -stats -v 24 -ss 5 -i XXX.mp4 -t 8 -an -level 52 -r 60 -g 300 -keyint_min 1 -b:v 0 -bufsize 0 -c:v h264_nvenc -preset slow -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -qp 16 YYY.mp4
 ```
+
+'...... -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 ......': 解码加快10%左右，但输出帧数量与源不一致
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC
 

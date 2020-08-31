@@ -36,7 +36,7 @@ ffmpeg -i XXX.mp4 -map v -c copy -f segment -segment_time 8 video_%03d.mp4 -map 
 
 ```
 (for %i in (*.flv) do @echo file '%i') > mylist.txt  
-Get-ChildItem *.mp4 | ForEach-Object { Write-Output "file '$_.Name'" } | Out-File mylist.txt  
+Get-ChildItem *.mp4 | ForEach-Object { Write-Output "file '$($_.Name)'" } | Out-File mylist.txt  
 ```
 
 ```

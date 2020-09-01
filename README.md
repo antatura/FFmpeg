@@ -23,7 +23,7 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -hide_banner -i $_.Name -lossless 
 
 
 
-- **切片与合并**
+- **切片与拼接**
 
 ```
 ffmpeg -y -hide_banner -i .\simple.mov -c copy -f segment -segment_time 13 -reset_timestamps 1 -segment_list simple.ffcat simple_%3d.mov  

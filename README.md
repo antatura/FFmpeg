@@ -56,7 +56,7 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.mkv
 - **提取视频片段**
 
 ```
-ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy YYY.mp4
+ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy -avoid_negative_ts 1 YYY.mp4
 ```
 
 > 快速寻址；从上一关键帧开始裁切 17.345s~28.000s

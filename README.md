@@ -23,11 +23,16 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -hide_banner -i $_.Name -lossless 
 
 
 
-- **切片**
+- **切片与合并**
 
 ```
-ffmpeg -i XXX.mp4 -map v -c copy -f segment -segment_time 8 video_%03d.mp4 -map a -c copy audio.mkv
+ffmpeg -y -hide_banner -i .\simple.mov -c copy -f segment -segment_time 13 -reset_timestamps 1 -segment_list simple.ffcat simple_%3d.mov  
+ffmpeg -y -hide_banner -i .\simple.ffcat -c copy .\simple-c.mov  
+p.py -p -s audio .\simple-c.mov
 ```
+
+> 适合 MPEG CFR  
+> http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 
 

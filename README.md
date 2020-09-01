@@ -61,7 +61,7 @@ ffmpeg -ss 00:00:18.000 -to 28 -i XXX.mp4 -c copy -avoid_negative_ts 1 YYY.mp4
 
 > 快速寻址；从上一关键帧开始裁切 17.345s~28.000s
 
-> 若`XXX.mp4 start: 0.000000`，则 `ss to i` 与 `ss i t` 等效 
+> 若`XXX.mp4 start: 0.000000`，则 `ss i t` 与 `ss to i` 等效 
 
 > https://trac.ffmpeg.org/wiki/Seeking     
 

@@ -540,7 +540,7 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 ## **视频差值对比**
 
 ```
-ffplay -hide_banner -f lavfi "movie=XXX.mp4[a];movie=YYY.mp4[b];[a][b]blend=all_mode=difference,eq=gamma=1.5,hue=h=312" -t 18
+ffplay -hide_banner -f lavfi "movie=XXX.mp4[a];movie=YYY.mp4[b];[a][b]blend=all_mode=difference,eq=gamma=1,hue=h=312" -t 18
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#blend-1

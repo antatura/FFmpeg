@@ -21,6 +21,15 @@
 
 
 
+- **PSNR SSIM**
+
+```
+ffmpeg -y -hide_banner -i XXX.mp4 -i YYY.mp4 -vf psnr -f null -
+```
+
+
+
+
 - **批处理**
 
 ```

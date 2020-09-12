@@ -1,8 +1,18 @@
-# FFmpeg doc
+# 🎈FFmpeg doc
 
-## FFmpeg
+- [FFmpeg](https://github.com/antatura/FFmpeg#ffmpeg)
+  - [A.V.S.D.C](https://github.com/antatura/FFmpeg#avsdc)
+  - [Video](https://github.com/antatura/FFmpeg#video)
+  - [Audio](https://github.com/antatura/FFmpeg#audio)
+  - [Subtitle](https://github.com/antatura/FFmpeg#subtitle)
+- [FFprobe](https://github.com/antatura/FFmpeg#ffprobe)
+- [FFplay](https://github.com/antatura/FFmpeg#ffplay)
+- [metaflac](https://github.com/antatura/FFmpeg#metaflac)
+- [Powershell x FFmpeg](https://github.com/antatura/FFmpeg#powershell-x-ffmpeg)
 
-### A.V.S.D.C
+## 🎄FFmpeg
+
+### 🎀A.V.S.D.C
 
 示例：
 
@@ -172,7 +182,7 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (R
 
 
 
-### Video
+### 🎀Video
 
 - **Nvidia GPU NVENC 编码**
 
@@ -342,7 +352,7 @@ ffmpeg -i XXX.mp4 -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -c:a pcm_s16
 
 
 
-### Audio
+### 🎀Audio
 
 - **查询音量**
 
@@ -432,7 +442,7 @@ ffmpeg -i XXX.aac -ar 48000 -b:a 256k -aac_coder 1 -strict -2 -cutoff 24000 YYY.
 
 
 
-### Subtitle
+### 🎀Subtitle
 
 - **导出字幕**
 
@@ -456,7 +466,7 @@ ffmpeg -i XXX.mp4 -vf subtitles=XXX.srt YYY.MP4
 
 
 
-## FFprobe
+## 🎄FFprobe
 
 - **查看视频Info**
 
@@ -525,7 +535,7 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 
 
 
-## FFplay 
+## 🎄FFplay 
 
 ## **视频差值对比**
 
@@ -543,7 +553,7 @@ ffplay -f lavfi "movie=XXX.mp4[a];movie=YYY.mp4[b];[a][b]blend=all_mode=differen
 
 
 
-## metaflac
+## 🎄metaflac
 
 - **编辑FLAC元数据与封面**
 
@@ -567,7 +577,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 
 
 
-## Powershell x FFmpeg
+## 🎄Powershell x FFmpeg
 
 - **Powershell生成缩略图**
 

@@ -502,7 +502,7 @@ ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time,pkt_size,p
 - **获取所有关键帧** 
 
 ```
-ffprobe -loglevel error -select_streams v:0 -skip_frame nokey -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
+ffprobe -hide_banner -select_streams v:0 -skip_frame nokey -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
 ```
 
 
@@ -511,7 +511,7 @@ ffprobe -loglevel error -select_streams v:0 -skip_frame nokey -show_entries fram
 - **关键帧计数**
 
 ```
-ffprobe -v error -count_frames -select_streams v:0 -skip_frame nokey -show_entries stream=nb_read_frames -of default=nokey=1:noprint_wrappers=1 XXX.mp4
+ffprobe -hide_banner -count_frames -select_streams v:0 -skip_frame nokey -show_entries stream=nb_read_frames -of default=nokey=1:noprint_wrappers=1 XXX.mp4
 ```
 
 `-skip_frame nokey`: Keyframes

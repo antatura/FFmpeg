@@ -16,7 +16,9 @@
 
 示例：
 
--crf 18 -preset 8 -tune film -profile:v high -level 51 -pix_fmt yuv420p -maxrate 24M -bufsize 48M -refs 4 -bf 6 -r 30000/1001 -s 1440x1080 -g 290 -keyint_min 1 -fast-pskip 0 -me_method umh -me_range 32 -subq 10 -aq-mode 2 -aq-strength 0.9 -trellis 2 -psy-rd 0.8:0.05 -ar 48000 -b:a 256k -ac 2 -c:a aac -af loudnorm -max_muxing_queue_size 2222
+`-crf 18 -preset 8 -tune film -profile:v high -level 51 -pix_fmt yuv420p -maxrate 24M -bufsize 48M -refs 4 -bf 6 -r 30000/1001 -s 1440x1080 -g 290 -keyint_min 1 -fast-pskip 0 -me_method umh -me_range 32 -subq 10 -aq-mode 2 -aq-strength 0.9 -trellis 2 -psy-rd 0.8:0.05 -ar 48000 -b:a 256k -ac 2 -c:a aac -af loudnorm -max_muxing_queue_size 2222`
+
+`-c:v libx265 -preset 7 -keyint_min 1 -pix_fmt yuv420p10le -x265-params open-gop=0:sao=0:strong-intra-smoothing=0:colormatrix=1:qg-size=8:rect=0:ref=4:rd=4:pbratio=1.2:cbqpoffs=-2:crqpoffs=-2:qcomp=0.65:lookahead-slices=4:tu-inter-depth=2:tu-intra-depth=2:limit-refs=3:deblock=-1:merange=25:ctu=32:rc-lookahead=60:bframes=6 -crf 23 -g 200`
 
 
 

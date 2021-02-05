@@ -164,6 +164,10 @@ ffmpeg -y -probesize 64M -f gdigrab -framerate 30 -i desktop -qp 0 -preset 0 -le
 ```
 
 ```
+ffmpeg -f gdigrab -framerate 30 -offset_x 223 -offset_y 143 -video_size 1480x784 -i desktop -qp 0 -preset 0 YYY.mp4
+```
+
+```
 ffmpeg -thread_queue_size 512 -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 

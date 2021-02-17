@@ -470,7 +470,8 @@ ffmpeg -i XXX.m2ts -map 0:2 -c:s copy YYY.sup
 - **烧制字幕**
 
 ```
-ffmpeg -i XXX.mp4 -vf subtitles=XXX.srt YYY.MP4
+ffmpeg -i XXX.mp4 -vf subtitles=XXX.srt YYY.MP4  
+ffmpeg -i XXX.mkv -vf ass=XXX.ass -ss 12:45 -t 60 YYY.mp4
 ```
 
 `ass=XXX.ass`

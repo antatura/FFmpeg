@@ -454,6 +454,15 @@ ffmpeg -i XXX.aac -ar 48000 -b:a 256k -aac_coder 1 -strict -2 -cutoff 24000 YYY.
 
 
 
+- **混音**
+
+```
+ffmpeg -i 01.wav -i 02.wav -filter_complex amix=inputs=2:duration=first:dropout_transition=2  mix.wav
+```
+
+
+
+
 
 
 

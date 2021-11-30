@@ -171,6 +171,8 @@ ffmpeg -f gdigrab -framerate 30 -offset_x 223 -offset_y 143 -video_size 1480x784
 ffmpeg -thread_queue_size 512 -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 
+> 需开启麦克风权限； 播放音量会影响录制音量。
+
 GPU:
 
 ```

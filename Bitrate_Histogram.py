@@ -1,4 +1,4 @@
-# Requirements: FFprobe, Python, matplotlib, numpy
+﻿# Requirements: FFprobe, Python, matplotlib, numpy
 # References: https://github.com/zeroepoch/plotbitrate
 
 import subprocess
@@ -67,20 +67,20 @@ mean = int(np.sum(list_size)/duration)
 
 endtime = datetime.now()
 eal = str(endtime-startime)
-w_title = '['+eal+']'+' '*3+args.input
+w_title = '['+eal+']'+' '*3+" Bitrate Histogram"
 xlabel = 'Start: '+str(ax0)+'    Duration: '+str(duration)+'    End: '+str(end)\
          +'    Frames: '+str(frames)+'    fps: '+str(round(frames/duration,2))
 
 ##print(list_size[:14])
 
 
-plt.figure().canvas.set_window_title(w_title)
-plt.title("Bitrate Histogram",fontsize=16,fontweight='bold')
+plt.get_current_fig_manager().set_window_title(w_title)
+plt.title(args.input,fontsize=16,fontweight='bold')
 plt.xlabel(xlabel,fontsize=12,fontweight='bold')
-plt.ylabel("kbit per sec",fontsize=12,fontweight='bold')
-plt.grid(False)
+plt.ylabel("kbps",fontsize=12,fontweight='bold')
+plt.grid(False)    #网格线
 plt.bar(range(len(list_size)),list_size,width=1,ec='#195f90',align='edge')
-plt.axhline(y=maxi,color='r',lw=2,ls='--',label='max: '+str(maxi))
+plt.axhline(y=maxi,color='r',lw=2,ls='--',label='Max: '+str(maxi))
 plt.axhline(y=mean,color='g',lw=2,ls='--',label='mean: '+str(mean))
 plt.axvline(x=ax0,color='y',lw=2.5,ls=':')
 plt.axvline(x=end,color='y',lw=2.5,ls=':')

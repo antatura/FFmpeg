@@ -77,7 +77,7 @@ xlabel = 'Start: '+str(ax0)+'    Duration: '+str(duration)+'    End: '+str(end)\
 plt.get_current_fig_manager().set_window_title(w_title)
 plt.title(args.input,fontsize=16,fontweight='bold')
 plt.xlabel(xlabel,fontsize=12,fontweight='bold')
-plt.ylabel("kbps",fontsize=12,fontweight='bold')
+plt.ylabel("kbit per sec",fontsize=12,fontweight='bold')
 plt.grid(False)    #网格线
 plt.bar(range(len(list_size)),list_size,width=1,ec='#195f90',align='edge')
 plt.axhline(y=maxi,color='r',lw=2,ls='--',label='Max: '+str(maxi))

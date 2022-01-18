@@ -213,6 +213,8 @@ ffmpeg -y -stats -v 24 -i XXX.mp4 -an -g 300 -keyint_min 1 -level 62 -b:v 0 -buf
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC
 
+> https://github.com/rigaya/NVEnc/blob/master/NVEncC_Options.zh-cn.md
+
 > https://devblogs.nvidia.com/nvidia-ffmpeg-transcoding-guide/
 
 

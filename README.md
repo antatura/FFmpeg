@@ -26,7 +26,7 @@
 - **PSNR SSIM**
 
 ```
-ffmpeg -y -hide_banner -i XXX.mp4 -i YYY.mp4 -map v -lavfi psnr -f null -
+ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
 ```
 
 

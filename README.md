@@ -530,7 +530,7 @@ ffprobe -v error -show_format -show_streams XXX.mp4
 - **输出每一帧的 time, size, type**
 
 ```
-ffprobe -v error -select_streams v:0 -show_entries frame=pkt_pts_time,pkt_size,pict_type -of csv=p=0 XXX.mp4 >XXX.csv
+ffprobe -v error -select_streams v:0 -show_entries frame=pts_time,pkt_size,pict_type -of csv=p=0 XXX.mp4 >XXX.csv
 ```
 
 

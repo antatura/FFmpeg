@@ -207,9 +207,9 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (R
 ffmpeg -y -hide_banner -i XXX.mp4 -c:v h264_nvenc -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -b:v 0 -bufsize 0 -keyint_min 1 -g 300 -an -preset p7 -qp 16 YYY.mp4
 ```
 
-- `...... -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 ......`: 解码加快10%左右，但输出帧数量与源不一致，不建议使用
+`...... -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 ......`：解码加快10%左右，但输出帧数量与源不一致，不建议使用
 
-- 改变preset的值以在速度与质量之间寻求平衡，默认p4，详见：`ffmpeg -h encoder=h264_nvenc`
+改变preset的值以在速度与质量之间寻求平衡，默认p4，详见：`ffmpeg -h encoder=h264_nvenc`
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC
 

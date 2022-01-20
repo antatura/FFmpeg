@@ -23,11 +23,28 @@
 
 
 
-- **PSNR SSIM**
+- **PSNR/SSIM**
 
 ```
 ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
 ```
+
+
+
+
+- **VMAF**
+
+```
+ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -lavfi libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8 -f null -
+```
+
+```
+ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -lavfi "[0:v]scale=1920:1080:flags=bicubic[main];[1:v]scale=1920:1080:flags=bicubic[refs];[main][refs]libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8" -f null -
+```
+
+> https://blog.otterbro.com/how-to-vmaf-ffmpeg/
+
+> https://github.com/Netflix/vmaf
 
 
 
@@ -212,6 +229,8 @@ ffmpeg -y -hide_banner -i XXX.mp4 -c:v h264_nvenc -profile:v high -rc-lookahead 
 改变preset的值以在速度与质量之间寻求平衡，默认p4，详见：`ffmpeg -h encoder=h264_nvenc`
 
 > https://github.com/Xaymar/obs-StreamFX/wiki/Encoder-FFmpeg-NVENC
+
+> https://blog.xaymar.com/2020/06/24/the-art-of-encoding-with-nvidia-turing-nvenc/
 
 > https://github.com/rigaya/NVEnc/blob/master/NVEncC_Options.zh-cn.md
 

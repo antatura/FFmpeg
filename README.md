@@ -35,11 +35,11 @@ ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
 - **VMAF**
 
 ```
-ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -lavfi libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8 -f null -
+ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8 -f null -
 ```
 
 ```
-ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -lavfi "[0:v]scale=1920:1080:flags=bicubic[main];[1:v]scale=1920:1080:flags=bicubic[refs];[main][refs]libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8" -f null -
+ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]scale=1920:1080:flags=bicubic[main];[1:v]scale=1920:1080:flags=bicubic[refs];[main][refs]libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8" -f null -
 ```
 
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/

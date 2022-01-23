@@ -40,7 +40,7 @@ ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi libvmaf=model_path=C
 
 以下适用于帧未对齐、分辨率未匹配的情况（默认皆为逐行扫描），并生成CSV文件以供分析：
 ```
-ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]fps=fps=60,scale=1920:1080:flags=bicubic[main];[1:v]fps=fps=60,scale=1920:1080:flags=bicubic[refs];[main][refs]libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8:log_fmt=csv:log_path=Test.csv" -f null -
+ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]fps=fps=60,scale=1920:1080[main];[1:v]fps=fps=60,scale=1920:1080[refs];[main][refs]libvmaf=model_path=C\\:/CMD/model/vmaf_v0.6.1.json:n_threads=8:log_fmt=csv:log_path=Test.csv" -f null -
 ```
 
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/

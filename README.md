@@ -70,7 +70,7 @@ ffmpeg -y -hide_banner -i .\simple.ffcat -c copy .\simple-c.mov
 p.py -p -s audio .\simple-c.mov
 ```
 
-> 适合 MPEG CFR  
+> 适合 MPEG CFR; 每13秒切一刀; 切片首帧为关键帧     
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 

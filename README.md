@@ -65,12 +65,12 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -hide_banner -i $_.Name -lossless 
 - **切片与拼接**
 
 ```
-ffmpeg -y -hide_banner -i .\simple.mov -c copy -f segment -segment_time 13 -reset_timestamps 1 -segment_list simple.ffcat simple_%3d.mov  
+ffmpeg -y -hide_banner -i .\simple.mov -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list simple.ffcat simple_%3d.mov  
 ffmpeg -y -hide_banner -i .\simple.ffcat -c copy .\simple-c.mov  
 p.py -p -s audio .\simple-c.mov
 ```
 
-> 适合 MPEG CFR; 每13秒切一刀; 切片首帧为关键帧     
+> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧     
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 

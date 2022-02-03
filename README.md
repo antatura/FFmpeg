@@ -542,7 +542,7 @@ ffprobe -v error -select_streams v:0 -show_entries frame=pts_time,pkt_size,pict_
 - **获取所有关键帧** 
 
 ```
-ffprobe -hide_banner -select_streams v:0 -skip_frame nokey -show_entries frame=pkt_pts_time -of csv=print_section=0 XXX.mp4
+ffprobe -v 24 -select_streams v:0 -skip_frame nokey -show_entries frame=pts_time -of csv=print_section=0 XXX.mp4
 ```
 
 

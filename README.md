@@ -34,13 +34,13 @@ ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
 
 - **VMAF**
 
-（低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同：
+（低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）：
 
 ```
 ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=8 -f null -
 ```
 
-（高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况（默认皆为逐行扫描），并生成CSV文件以供分析：
+（高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
 ```
 ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]fps=60,scale=1920:1080[main];[1:v]fps=60,scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Test.csv" -f null -
 ```

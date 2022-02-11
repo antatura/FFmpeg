@@ -26,7 +26,7 @@
 - **PSNR/SSIM**
 
 ```
-ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
+ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi psnr -f null -
 ```
 
 
@@ -37,12 +37,12 @@ ffmpeg -y -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi psnr -f null -
 （低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）：
 
 ```
-ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=8 -f null -
+ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=8 -f null -
 ```
 
 （高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
 ```
-ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]fps=60,scale=1920:1080[main];[1:v]fps=60,scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Test.csv" -f null -
+ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi "[0:v]fps=60,scale=1920:1080[main];[1:v]fps=60,scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Main.csv" -f null -
 ```
 
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/
@@ -58,7 +58,7 @@ ffmpeg -hide_banner -i Test.mp4 -i Source.mp4 -map v -lavfi "[0:v]fps=60,scale=1
 
 ```
 for %a in (*.mp4 *.flv) do ffmpeg -i "%a" -crf 20 "output\%~na_cfr-20.mp4"  
-Get-ChildItem *.jpg | ForEach-Object { ffmpeg -hide_banner -i $_.Name -lossless 1 "$($_.BaseName).webp" }
+Get-ChildItem *.jpg | ForEach-Object { ffmpeg -i $_.Name -lossless 1 "$($_.BaseName).webp" }
 ```
 
 > 先建立output文件夹；若要保存为.bat，则需将%替换为%% 
@@ -69,9 +69,9 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -hide_banner -i $_.Name -lossless 
 - **切片与拼接**
 
 ```
-ffmpeg -y -hide_banner -i .\simple.mov -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list simple.ffcat simple_%3d.mov  
-ffmpeg -y -hide_banner -i .\simple.ffcat -c copy .\simple-c.mov  
-p.py -p -s audio .\simple-c.mov
+ffmpeg -i Simple.mov -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list Simple.ffcat Simple_%3d.mov  
+ffmpeg -i Simple.ffcat -c copy .\Simple-c.mov  
+p.py -p -s audio .\Simple-c.mov
 ```
 
 > 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧     
@@ -99,18 +99,20 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.mkv
 - **提取视频片段**
 
 ```
-ffmpeg -ss 00:00:18.000 -i XXX.mp4 -t 10 -c copy -avoid_negative_ts 1 YYY.mp4
+ffmpeg -ss 00:00:18.000 -t 15 -i XXX.mp4 -c copy YYY.mp4
 ```
 
-> 快速寻址；从上一关键帧开始裁切 17.345s~28.000s
+> 若输出容器格式为mp4，则从指定的精确起始位置开始裁切（首帧非关键帧，末端有多余帧）
 
-> 若`XXX.mp4 start: 0.000000`，则 `ss to i` 与 `ss i t` 等效 
+> 若输出容器格式为mkv，则从指定起始位置的上一关键帧开始裁切（首帧为关键帧，末端有多余帧）
+
+>  `-ss 18 -t 15 -i ...` 与 `-ss 18 -to 33 -i ...` 等效 
 
 > https://trac.ffmpeg.org/wiki/Seeking     
 
 |                          |               优点                |                     缺点                      |
 | :----------------------: | :-------------------------------: | :-------------------------------------------: |
-| 有 `-c copy`，不重新编码 |             瞬间提取              |             实际时间范围不精确             |
+| 有 `-c copy`，不重新编码 |             瞬间提取              |             实际时间范围不太精确             |
 | 无 `-c copy`，需重新编码 | 实际时间范围准确：18.000s~28.000s |             重编码缓慢，CPU满负载             |
 
 
@@ -226,10 +228,10 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (R
 - **Nvidia GPU NVENC 编码**
 
 ```
-ffmpeg -y -hide_banner -i XXX.mp4 -c:v h264_nvenc -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -b:v 0 -bufsize 0 -keyint_min 1 -g 300 -an -preset p7 -qp 16 YYY.mp4
+ffmpeg -i XXX.mp4 -c:v h264_nvenc -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -b:v 0 -bufsize 0 -keyint_min 1 -g 300 -an -preset p7 -qp 16 YYY.mp4
 ```
 
-`...... -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 ......`：解码加快10%左右，但输出帧数量与源不一致，不建议使用
+`...... -hwaccel cuda -c:v h264_cuvid -i XXX.mp4 ......`：解码加快10%左右，但输出帧数量与源不一致
 
 改变preset的值以在速度与质量之间寻求平衡，默认p4，详见：`ffmpeg -h encoder=h264_nvenc`
 
@@ -280,7 +282,7 @@ ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:font
 - **生成单色视频并添加计时器水印**
 
 ```
-ffmpeg -hide_banner -y -f lavfi -i "color=c=0x333333:s=1920x1080:r=10,drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=96:fontcolor='white':timecode='00\:00\:00\:00':rate=10:text='TCR\:':boxcolor=0x000000AA:box=1:x=960-text_w/2:y=540" -preset 3 -g 100 -keyint_min 100 -t 60 YYY.mp4
+ffmpeg -f lavfi -i "color=c=0x333333:s=1920x1080:r=10,drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:fontsize=96:fontcolor='white':timecode='00\:00\:00\:00':rate=10:text='TCR\:':boxcolor=0x000000AA:box=1:x=960-text_w/2:y=540" -g 100 -keyint_min 100 -t 60 YYY.mp4
 ```
 
 > rate = video fps
@@ -414,7 +416,7 @@ ffmpeg-normalize xxx.wav -p -n
 ```
 
 ```
-ffmpeg -hide_banner -ss 99 -i XXX.mp4 -t 101 -map a:0 -af ebur128=peak=true:framelog=verbose -f null -
+ffmpeg -i XXX.mp4 -map a:0 -af ebur128=peak=true:framelog=verbose -f null -
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#ebur128-1
@@ -595,7 +597,7 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 ## **视频差值对比**
 
 ```
-ffplay -hide_banner -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all_mode=difference,eq=gamma=1,hue=h=312" -t 18
+ffplay -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all_mode=difference,eq=gamma=1,hue=h=312" -t 18
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#blend-1

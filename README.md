@@ -42,7 +42,7 @@ ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi libvmaf=model=version=vmaf_4k_v0.6.
 
 （高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
 ```
-ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi "[0:v]fps=60,scale=1920:1080[main];[1:v]fps=60,scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Main.csv" -f null -
+ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v -lavfi "[0:v]scale=1920:1080[main];[1:v]scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Main.csv" -f null -
 ```
 
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/

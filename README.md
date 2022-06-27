@@ -609,6 +609,16 @@ ffplay -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all
 
 
 
+## **N卡硬解**
+
+```
+ffplay -vcodec hevc_cuvid -an -x 960 -y 540 XXX.mp4
+```
+
+
+
+
+
 
 
 

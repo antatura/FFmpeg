@@ -467,7 +467,7 @@ ffmpeg -i XXX.wav -filter_complex "showwavespic=s=1920x1080:split_channels=1" -f
 - **绘制音频频谱**
 
 ```
-ffmpeg -i XXX.mp4 -v 16 -lavfi showspectrumpic=s=1764x1024:color=fruit:drange=85 X.png; ffplay -v 16 -fs X.png
+ffmpeg -i XXX.mp4 -y -v 16 -lavfi showspectrumpic=s=1764x1024:color=fruit:drange=85 X.png; ffplay -v 16 -fs X.png
 ```
 
 [【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)

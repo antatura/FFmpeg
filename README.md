@@ -598,7 +598,14 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 
 ## 🎄FFplay 
 
-## **视频差值对比**
+
+- **以选定音频流和字幕播放视频**
+
+```
+ffplay XXX.mkv -fs -ast 2 -vf subtitles=XXX.mkv:si=0
+```
+
+- **视频差值对比**
 
 ```
 ffplay -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all_mode=difference,eq=gamma=1,hue=h=312" -t 18
@@ -609,7 +616,7 @@ ffplay -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all
 
 
 
-## **N卡硬解**
+- **N卡硬解**
 
 ```
 ffplay -vcodec hevc_cuvid -an -x 960 -y 540 XXX.mp4

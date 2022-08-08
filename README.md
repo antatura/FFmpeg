@@ -172,6 +172,15 @@ ffmpeg -i XXX.mp4 -vf crop=w:h:x:y,scale=3840:-2 YYY.mp4
 
 
 
+- **添加黑边**
+
+```
+ffmpeg -i XXX.mp4 -vf scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1 YYY.mp4
+```
+
+
+
+
 - **加速视频和音频**
 
 ```

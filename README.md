@@ -531,7 +531,7 @@ ffmpeg -i XXX.m2ts -map 0:2 -c:s copy YYY.sup
 ffmpeg -ss 12:34 -copyts -i XXX.mkv -ss 12:34 -t 56 -vf "subtitles=XXX.srt:force_style='Fontname=Source Han Serif,Fontsize=28,Outline=2,MarginV=20,PrimaryColour=&H8515C7'" YYY.mkv
 ```
 
-`ass=XXX.ass`
+> &H8515C7 = #C71586
 
 
 
@@ -613,13 +613,12 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 ## 🎄FFplay 
 
 
-- **以选定音频流和自定义字幕样式播放视频**
+- **以选定音频流和字幕播放视频**
 
 ```
-ffplay XXX.mkv -fs -ast 2 -vf “subtitles=XXX.mkv:si=0:force_style='Fontname=Source Han Serif,Fontsize=28,Outline=2,MarginV=20,PrimaryColour=&H8515C7'"
+ffplay XXX.mkv -fs -ast 2 -vf subtitles=XXX.mkv:si=0
 ```
 
-> &H8515C7 = #C71586
 
 - **视频差值对比**
 

@@ -236,6 +236,12 @@ ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (R
 
 
 
+
+
+
+
+
+
 ### 🎀Video
 
 - **Nvidia GPU NVENC 编码**

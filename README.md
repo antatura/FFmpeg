@@ -528,8 +528,7 @@ ffmpeg -i XXX.m2ts -map 0:2 -c:s copy YYY.sup
 - **烧制字幕**
 
 ```
-ffmpeg -i XXX.mp4 -vf subtitles=XXX.srt YYY.MP4  
-ffmpeg -i XXX.mkv -vf ass=XXX.ass -ss 12:45 -t 60 YYY.mp4
+ffmpeg -ss 12:34 -copyts -i XXX.mkv -ss 12:34 -t 56 -vf "subtitles=XXX.srt:force_style='Fontname=Source Han Serif,Fontsize=28,Outline=2,MarginV=20,PrimaryColour=&H8515C7'" YYY.mkv
 ```
 
 `ass=XXX.ass`

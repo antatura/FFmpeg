@@ -608,10 +608,10 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 ## 🎄FFplay 
 
 
-- **以选定音频流和字幕播放视频**
+- **以选定音频流和自定义字幕样式播放视频**
 
 ```
-ffplay XXX.mkv -fs -ast 2 -vf subtitles=XXX.mkv:si=0
+ffplay XXX.mkv -fs -ast 2 -vf “subtitles=XXX.mkv:si=0:force_style='Fontname=Source Han Serif,Fontsize=28,Outline=2,MarginV=20,PrimaryColour=&H8515C7'"
 ```
 
 - **视频差值对比**

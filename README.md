@@ -292,7 +292,7 @@ ffmpeg -i XXX.mp4 -vf "fps=10,scale=480:-1:flags=lanczos,split[s0][s1];[s0]palet
 - **添加文字水印**
 
 ```
-ffmpeg -i XXX.mp4 -vf "drawtext=font=consolas:text='Abg0123':x=20:y=H-th-20:fontsize=30:fontcolor=white:borderw=3:bordercolor=black" YYY.mp4
+ffmpeg -i XXX.mp4 -vf "drawtext=font='Source Han Sans':text='Abg0123':x=20:y=H-th-20:fontsize=30:fontcolor=white:borderw=3:bordercolor=black" YYY.mp4
 ```
 
 

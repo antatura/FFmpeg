@@ -35,7 +35,7 @@ ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi psnr -f null -
 - **计算流的Hash值**
 
 ```
-ffmpeg -v 16 -i XXX.mkv -map v:0 -f hash -hash MD5 -
+ffmpeg -v 8 -i XXX.mkv -map v:0 -f hash -hash murmur3 -
 ```
 
 

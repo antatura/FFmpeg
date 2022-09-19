@@ -32,6 +32,15 @@ ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi psnr -f null -
 
 
 
+- **计算流的Hash值**
+
+```
+ffmpeg -v 16 -i XXX.mkv -map v:0 -f hash -hash MD5 -
+```
+
+
+
+
 - **VMAF**
 
 （低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）：

@@ -200,7 +200,7 @@ ffmpeg -i XXX.mp4 -vf scale=1920:1080:force_original_aspect_ratio=decrease,pad=1
 ffmpeg -i XXX.mp4 -vf "fade=t=in:st=0:d=5,fade=t=out:st=55:d=5"
 ```
 
-> 0~5秒：淡入； 55~60秒：淡出
+> 0-5秒：淡入； 55-60秒：淡出
 
 
 

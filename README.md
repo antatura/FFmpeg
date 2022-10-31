@@ -140,6 +140,15 @@ ffmpeg -i input.mkv -map 0:1 -map 0:2 -c copy audios_only.mkv -map 0:0 -c copy v
 
 
 
+- **更改流的默认值**
+
+```
+ffmpeg -i XXX.mkv -map 0 -c copy -disposition:a:0 0 -disposition:a:2 default YYY.mkv
+```
+
+
+
+
 - **循环流**
 
 ```

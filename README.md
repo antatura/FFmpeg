@@ -230,7 +230,7 @@ ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
 - **录制桌面**
 
 ```
-ffmpeg -y -filter_complex ddagrab=framerate=60,hwdownload,format=bgra -c:v h264_nvenc -profile:v high -pix_fmt yuv420p -qp 12 YYY.mp4
+ffmpeg -y -filter_complex ddagrab=framerate=120,hwdownload,format=bgra -c:v h264_nvenc -profile:v high -pix_fmt yuv420p -qp 12 YYY.mp4
 ```
 
 ```

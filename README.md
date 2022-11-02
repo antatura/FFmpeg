@@ -417,7 +417,7 @@ ffmpeg -framerate 30 -i YYY_%3d.png -c copy YYY.mkv
 - **创建仅包含图像的视频**
 
 ```
-ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -c:v libx264 -pix_fmt yuv420p -qp 0 -preset 0 YYY.mp4
+ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -pix_fmt yuv420p YYY.mp4
 ```
 
 

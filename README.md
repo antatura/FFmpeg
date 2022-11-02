@@ -229,39 +229,30 @@ ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
 
 - **录制桌面**
 
-CPU:
+```
+ffmpeg -y -filter_complex ddagrab=framerate=60,hwdownload,format=bgra -c:v h264_nvenc -profile:v high -pix_fmt yuv420p -qp 12 YYY.mp4
+```
 
 ```
 ffmpeg -y -probesize 64M -f gdigrab -framerate 30 -i desktop -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 
-```
-ffmpeg -f gdigrab -framerate 30 -offset_x 223 -offset_y 143 -video_size 1480x784 -i desktop -qp 0 -preset 0 YYY.mp4
-```
-
-```
-ffmpeg -thread_queue_size 512 -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" -qp 0 -preset 0 -level 51 YYY.mp4
-```
-
-> 需开启麦克风权限； 播放音量会影响录制音量。
-
-GPU:
-
-```
-ffmpeg -f gdigrab -framerate 30 -i desktop -c:v h264_nvenc -qp 0 -profile:v high -level 51 YYY.mkv
-```
-
 > https://trac.ffmpeg.org/wiki/Capture/Desktop  
 > https://ffmpeg.org/ffmpeg-devices.html#gdigrab  
-> GPU录制：总功耗46w；CPU录制：总功耗25w；皆无法正常录制60帧
+> http://ffmpeg.org/ffmpeg-filters.html#ddagrab
 
-同时录制声音:
+
+
+
+- **录制声音**
 
 ```
 ffmpeg -list_devices true -f dshow -i dummy     
-ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="麦克风阵列 (Realtek(R) Audio)" YYY.mp4  
-ffmpeg -f gdigrab -framerate 30 -i desktop -f dshow -i audio="立体声混音 (Realtek(R) Audio)" YYY.mp4
+ffmpeg -f dshow -i audio="麦克风阵列 (Realtek(R) Audio)" YYY.wav  
+ffmpeg -f dshow -i audio="立体声混音 (Realtek(R) Audio)" YYY.wav
 ```   
+
+> 需开启麦克风权限； 播放音量会影响录制音量
 
 
 

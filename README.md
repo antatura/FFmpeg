@@ -472,7 +472,7 @@ ffmpeg -i XXX.mp4 -map a:0 -af ebur128=peak=true:framelog=verbose -f null -
 - **正常化音量大小**
 
 ```
-ffmpeg-normalize audio.m4a -vn -sn -mn -cn -t -17 -tp -1 -lrt 15 -ar 48000 -o output.wav
+ffmpeg-normalize audio.m4a -vn -sn -mn -cn --keep-loudness-range-target -t -17 -tp -1 -ar 48000 -o output.wav
 ```
 
 > https://github.com/slhck/ffmpeg-normalize

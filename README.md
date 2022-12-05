@@ -561,6 +561,15 @@ ffmpeg -ss 12:34 -copyts -i XXX.mkv -ss 12:34 -t 56 -vf "subtitles=XXX.srt:force
 
 
 
+- **为MP4添加srt字幕**
+
+```
+ffmpeg -i XXX.mp4 -i XXX.srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=chs YYY.mp4
+```
+
+
+
+
 
 
 

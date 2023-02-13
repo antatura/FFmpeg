@@ -78,7 +78,7 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -i $_.Name -lossless 1 "$($_.BaseN
 - **切片与拼接**
 
 ```
-ffmpeg -i Simple.mov -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list Simple.ffcat Simple_%3d.mov  
+ffmpeg -i Simple.mov -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list Simple.ffcat Simple_%3d.mov  
 ffmpeg -i Simple.ffcat -c copy .\Simple-c.mov  
 p.py -p -s audio .\Simple-c.mov
 ```

@@ -78,9 +78,9 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -i $_.Name -lossless 1 "$($_.BaseN
 - **切片与拼接**
 
 ```
-ffmpeg -i Simple.mov -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list Simple.ffcat Simple_%3d.mov  
-ffmpeg -i Simple.ffcat -c copy .\Simple-c.mov  
-p.py -p -s audio .\Simple-c.mov
+ffmpeg -i XXX.mov -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list XXX.ffcat XXX_%3d.mov  
+ffmpeg -i XXX.ffcat -c copy .\XXX-C.mov  
+p.py -p -s audio .\XXX-C.mov
 ```
 
 > 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧    

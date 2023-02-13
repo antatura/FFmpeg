@@ -83,8 +83,8 @@ ffmpeg -i Simple.ffcat -c copy .\Simple-c.mov
 p.py -p -s audio .\Simple-c.mov
 ```
 
-> -segment_times 13,18,55 ：以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧
-> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧     
+> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧    
+> -segment_times 13,18,55 ：以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧  
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 

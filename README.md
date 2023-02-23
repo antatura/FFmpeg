@@ -39,7 +39,7 @@ ffmpeg -v 8 -i XXX.mkv -map v:0 -f hash -hash murmur3 -
 ```
 
 ```
-ffmpeg -v 8 -i XXX.mkv -vf trim=start_frame=60:end_frame=65 -map v:0 -f framehash -hash murmur3 -
+ffmpeg -v 8 -i XXX.mkv-map v:0 -vf trim=start_frame=60:end_frame=65 -f framehash -hash murmur3 -
 ```
 > 分别计算帧序列 [60,65) 的Hash值
 

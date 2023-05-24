@@ -431,6 +431,18 @@ ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -pix_fmt yuv420p YYY.mp4
 
 
 
+- **Dolby Vision >>> SDR**
+
+> https://github.com/jellyfin/jellyfin-ffmpeg/releases  
+> https://www.reddit.com/r/ffmpeg/comments/yn5krm/comment/iv7a3ui/  
+
+```
+-init_hw_device opencl:0 -i XXX.mp4 -vf hwupload,tonemap_opencl=tonemap=bt2390:desat=0:peak=100:format=nv12,hwdownload,format=nv12
+```
+
+
+
+
 - **编码为Prores**
 
 `ffmpeg -h encoder=prores_ks`

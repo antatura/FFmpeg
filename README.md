@@ -1,20 +1,10 @@
-# 🎈FFmpeg doc
+# 🎄FFmpeg
 
-- [FFmpeg](https://github.com/antatura/FFmpeg#ffmpeg)
-  - [A.V.S.D.C](https://github.com/antatura/FFmpeg#avsdc)
-  - [Video](https://github.com/antatura/FFmpeg#video)
-  - [Audio](https://github.com/antatura/FFmpeg#audio)
-  - [Subtitle](https://github.com/antatura/FFmpeg#subtitle)
-- [FFprobe](https://github.com/antatura/FFmpeg#ffprobe)
-- [FFplay](https://github.com/antatura/FFmpeg#ffplay)
-- [metaflac](https://github.com/antatura/FFmpeg#metaflac)
-- [Powershell x FFmpeg](https://github.com/antatura/FFmpeg#powershell-x-ffmpeg)
+## 🎀A.V.S.D.C
 
-## 🎄FFmpeg
 
-### 🎀A.V.S.D.C
 
-示例：
+### 示例
 
 `-crf 18 -preset 8 -tune film -profile:v high -level 51 -pix_fmt yuv420p -maxrate 24M -bufsize 48M -refs 4 -bf 6 -r 30000/1001 -s 1440x1080 -g 290 -keyint_min 1 -fast-pskip 0 -me_method umh -me_range 32 -subq 10 -aq-mode 2 -aq-strength 0.9 -trellis 2 -psy-rd 0.8:0.05 -ar 48000 -b:a 256k -ac 2 -c:a aac -af loudnorm -max_muxing_queue_size 2222`
 
@@ -23,38 +13,39 @@
 
 
 
-- **PSNR/SSIM**
+### 🥕**SSIM/PSNR**
 
-```
-ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi psnr -f null -
-```
-
-
-
-
-- **计算流的Hash值**
-
-```
-ffmpeg -v 8 -i XXX.mkv -map v:0 -f hash -hash murmur3 -
+```Bash
+ffmpeg -i Main.mp4 -i Refs.mp4 -map v:0 -lavfi ssim -f null -
 ```
 
+
+
+
+### 🥕**计算Hash值**
+
 ```
-ffmpeg -v 8 -i XXX.mkv-map v:0 -vf trim=start_frame=60:end_frame=65 -f framehash -hash murmur3 -
+ffmpeg -i XXX.mkv -map v:0 -f hash -hash murmur3 -
 ```
-> 分别计算帧序列 [60,65) 的Hash值
+
+- 分别计算帧序列 [60,65) 的Hash值
+
+```
+ffmpeg -i XXX.mkv -map v:0 -vf trim=start_frame=60:end_frame=65 -f framehash -hash murmur3 -
+```
 
 
 
 
-- **VMAF**
+### 🥕**VMAF**
 
-（低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）：
+- （低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）
 
 ```
 ffmpeg -i Main.mp4 -i Refs.mp4 -map v -lavfi libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=8 -f null -
 ```
 
-（高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
+- （高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析
 ```
 ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v -lavfi "[0:v]scale=1920:1080[main];[1:v]scale=1920:1080[refs];[main][refs]libvmaf=n_threads=8:log_fmt=csv:log_path=Main.csv" -f null -
 ```
@@ -68,37 +59,44 @@ ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v -lavfi "[0:v]scale=1920:1080[mai
 
 
 
-- **批处理**
+### 🥕**批处理**
 
 ```
 for %a in (*.mp4 *.flv) do ffmpeg -i "%a" -crf 20 "output\%~na_cfr-20.mp4"  
+```
+> 先建立output文件夹；若要保存为.bat，则需将%替换为%%     
+   
+   
+```powershell
 Get-ChildItem *.jpg | ForEach-Object { ffmpeg -i $_.Name -lossless 1 "$($_.BaseName).webp" }
 ```
 
-> 先建立output文件夹；若要保存为.bat，则需将%替换为%% 
 
 
 
-
-- **切片与拼接**
+### 🥕**切片与拼接**
 
 ```
 ffmpeg -i XXX.mov -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list XXX.ffcat XXX_%3d.mov  
 ffmpeg -i XXX.ffcat -c copy .\XXX-C.mov  
-p.py -p -s audio .\XXX-C.mov
 ```
 
-> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧    
-> -segment_times 13,18,55 ：以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧  
+> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧
+  
+> `-segment_times 13,18,55` 以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧
+
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 
 
 
-- **合并多条视频分段**
+### 🥕**合并多条视频分段**
 
 ```
-(for %i in (*.flv) do @echo file '%i') > mylist.txt  
+(for %i in (*.flv) do @echo file '%i') > mylist.txt 
+```
+
+```powershell
 Get-ChildItem *.mp4 | ForEach-Object { Write-Output "file '$($_.Name)'" } | Out-File mylist.txt  
 ```
 
@@ -111,23 +109,19 @@ ffmpeg -f concat -i mylist.txt -c copy YYY.mkv
 
 
 
-- **提取视频片段**
+### 🥕**提取视频片段**
 
 ```
-ffmpeg -ss 00:00:18.000 -t 15 -i XXX.mp4 -c copy YYY.mp4
+ffmpeg -ss 00:00:18.000 -t 15 -i XXX.mp4 -c copy -avoid_negative_ts 1 YYY.mp4
 ```
 
-> 若输出容器格式为mp4，则从指定的精确起始位置开始裁切（首帧非关键帧，末端有多余帧）（输出文件大小与mkv版相同）
+> `-avoid_negative_ts 1` 从指定起始位置的上一关键帧开始裁切，末端或有缺失帧，起始时间戳或略大于零
 
-> 若输出容器格式为mkv，则从指定起始位置的上一关键帧开始裁切（首帧为关键帧，末端有多余帧）
+> 若输出容器格式为mkv，可省略`-avoid_negative_ts 1`
 
-> 若`to`位于`[input]`之后，则等同于时间段`t`
+> 若`to`位于`[input]`之后，则视为时间段`t`
 
->  `-ss 18 -t 15 -i ...` 与 `-ss 18 -to 33 -i ...` 等效
-
-> `-avoid_negative_ts 1  [output]`：从指定起始位置的上一关键帧开始裁切，末端有多余帧，起始时间戳略微微大于零
-
-> `-copyts`：从指定起始位置的上一关键帧开始裁切，末端有多余帧，起始时间戳不重置
+> `-ss 18 -t 15 -i ...` 与 `-ss 18 -to 33 -i ...` 等效
 
 > 假设输入视频的起始时间戳为12.000，若...-ss 14...，则从输入视频的原始时间戳26.000开始裁切
 
@@ -141,16 +135,16 @@ ffmpeg -ss 00:00:18.000 -t 15 -i XXX.mp4 -c copy YYY.mp4
 
 
 
-- **分离视频流与音频流**
+### 🥕**分离视频流与音频流**
 
 ```
-ffmpeg -i input.mkv -map 0:1 -map 0:2 -c copy audios_only.mkv -map 0:0 -c copy video_only.mkv
+ffmpeg -i input.mkv -map 0:1 -map 0:2 -c copy audio_only.mkv -map 0:0 -c copy video_only.mkv
 ```
 
 
 
 
-- **更改流的默认值**
+### 🥕**更改流的默认值**
 
 ```
 ffmpeg -i XXX.mkv -map 0 -c copy -disposition:a:0 0 -disposition:a:2 default YYY.mkv
@@ -159,30 +153,29 @@ ffmpeg -i XXX.mkv -map 0 -c copy -disposition:a:0 0 -disposition:a:2 default YYY
 
 
 
-- **循环流**
+### 🥕**循环流**
 
 ```
 ffmpeg -stream_loop 3 -i XXX.wav -c copy XXX_x4.wav
 ```
-
-> `-stream_loop number (input)`  
+  
 > Set number of times input stream shall be looped. Loop 0 means no loop, loop -1 means infinite loop.
 
 
 
 
-- **合并视频与音频**
+### 🥕**合并视频与音频**
 
 ```
 ffmpeg -i XXX.mp4 -i XXX.aac -c copy YYY.mp4
 ```
 
-> 合并后时长取较长段。若视频较长，则后半段音量为零；若音频较长，则后半段为视频的最后一帧。
+> 合并后时长取较长段。若视频较长，则后半段音量为零；若音频较长，则后半段为视频的最后一帧
 
 
 
 
-- **旋转视频方向**
+### 🥕**旋转视频方向**
 
 ```
 ffmpeg -i XXX.mp4 -map_metadata 0 -metadata:s:v rotate="90" -c copy YYY.mp4
@@ -191,7 +184,7 @@ ffmpeg -i XXX.mp4 -map_metadata 0 -metadata:s:v rotate="90" -c copy YYY.mp4
 
 
 
-- **裁切视频**
+### 🥕**裁切视频**
 
 ```
 ffmpeg -i XXX.mp4 -vf crop=w:h:x:y,scale=3840:-2 YYY.mp4
@@ -200,7 +193,7 @@ ffmpeg -i XXX.mp4 -vf crop=w:h:x:y,scale=3840:-2 YYY.mp4
 
 
 
-- **添加黑边**
+### 🥕**添加黑边**
 
 ```
 ffmpeg -i XXX.mp4 -vf "pad=1920:1080:(ow-iw)/2:(oh-ih)/2" YYY.mp4
@@ -213,7 +206,7 @@ ffmpeg -i XXX.mp4 -vf scale=1920:1080:force_original_aspect_ratio=decrease,pad=1
 
 
 
-- **淡入淡出**
+### 🥕**淡入淡出**
 
 ```
 ffmpeg -i XXX.mp4 -vf "fade=t=in:st=0:d=5,fade=t=out:st=55:d=5"
@@ -224,7 +217,7 @@ ffmpeg -i XXX.mp4 -vf "fade=t=in:st=0:d=5,fade=t=out:st=55:d=5"
 
 
 
-- **加速视频和音频**
+### 🥕**加速视频和音频**
 
 ```
 ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
@@ -235,7 +228,7 @@ ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
 
 
 
-- **录制桌面**
+### 🥕**录制桌面**
 
 ```
 ffmpeg -filter_complex ddagrab=framerate=120,hwdownload,format=bgra -c:v h264_nvenc -profile:v high -pix_fmt yuv420p -g 600 -qp 12 YYY.mp4
@@ -245,14 +238,16 @@ ffmpeg -filter_complex ddagrab=framerate=120,hwdownload,format=bgra -c:v h264_nv
 ffmpeg -probesize 64M -f gdigrab -framerate 30 -i desktop -qp 0 -preset 0 -level 51 YYY.mp4
 ```
 
-> https://trac.ffmpeg.org/wiki/Capture/Desktop  
+> https://trac.ffmpeg.org/wiki/Capture/Desktop 
+
 > https://ffmpeg.org/ffmpeg-devices.html#gdigrab  
+
 > http://ffmpeg.org/ffmpeg-filters.html#ddagrab
 
 
 
 
-- **录制声音**
+### 🥕**录制声音**
 
 ```
 ffmpeg -list_devices true -f dshow -i dummy     
@@ -276,9 +271,9 @@ ffmpeg -f dshow -i audio="立体声混音 (Realtek(R) Audio)" YYY.wav
 
 
 
-### 🎀Video
+## 🎀Video
 
-- **Nvidia GPU NVENC 编码**
+### 🥕**Nvidia GPU NVENC 编码**
 
 ```
 ffmpeg -i XXX.mp4 -c:v h264_nvenc -profile:v high -rc-lookahead 32 -bf 4 -b_ref_mode 2 -temporal_aq 1 -spatial_aq 1 -aq-strength 15 -b:v 0 -bufsize 0 -keyint_min 1 -g 300 -an -preset p7 -qp 16 YYY.mp4
@@ -464,7 +459,7 @@ ffmpeg -i XXX.mp4 -c:v prores_ks -profile:v 4 -pix_fmt yuva444p10le -c:a pcm_s16
 
 
 
-### 🎀Audio
+## 🎀Audio
 
 - **查询音量**
 
@@ -563,7 +558,7 @@ ffmpeg -i 01.wav -i 02.wav -filter_complex amix=inputs=2:duration=first:dropout_
 
 
 
-### 🎀Subtitle
+## 🎀Subtitle
 
 - **导出字幕**
 
@@ -596,7 +591,7 @@ ffmpeg -i XXX.mp4 -i XXX.srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 l
 
 
 
-## 🎄FFprobe
+# 🎄FFprobe
 
 - **查看视频Info**
 
@@ -665,7 +660,7 @@ ffmpeg -i XXX.mp3 -i XXX.png -map 0:0 -map 1:0 -c copy -id3v2_version 3 -write_i
 
 
 
-## 🎄FFplay 
+# 🎄FFplay 
 
 
 - **以选定音频流和字幕播放视频**
@@ -701,7 +696,7 @@ ffplay -vcodec hevc_cuvid -an -x 960 -y 540 XXX.mp4
 
 
 
-## 🎄metaflac
+# 🎄metaflac
 
 - **编辑FLAC元数据与封面**
 
@@ -725,7 +720,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 
 
 
-## 🎄Powershell x FFmpeg
+# 🎄Powershell x FFmpeg
 
 - **Powershell生成缩略图**
 

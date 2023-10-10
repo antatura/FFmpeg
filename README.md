@@ -676,7 +676,7 @@ ffplay XXX.mkv -fs -ast 2 -vf subtitles=XXX.mkv:si=0
 ### 🥕**视频差值对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps=60[a];movie=YYY.mp4,fps=60[b];[a][b]blend=all_mode=difference,hue=h=312,eq=gamma=2"
+ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps[a];movie=YYY.mp4,fps[b];[a][b]blend=all_mode=difference,hue=h=312,eq=gamma=2"
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#blend-1

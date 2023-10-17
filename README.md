@@ -676,7 +676,7 @@ ffplay XXX.mkv -fs -ast 2 -vf subtitles=XXX.mkv:si=0
 ### 🥕**视频差值对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps[A];movie=YYY.mp4,fps[B];[A][B]blend=all_mode=difference,hue=h=312,eq=gamma=2"
+ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps,format=gbrp10le[A];movie=YYY.mp4,fps,format=gbrp10le[B];[A][B]blend=all_mode=difference,eq=gamma=1.5"
 ```
 
 > https://ffmpeg.org/ffmpeg-filters.html#blend-1
@@ -687,7 +687,7 @@ ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps[A];movie=YYY.mp4,fps[B];[A][B]blend
 ### 🥕**音频频谱对比对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a[A];[A]showspectrumpic,format=gbrp10le[AA];amovie=XXX.wav[B];[B]showspectrumpic,format=gbrp10le[BB];[AA][BB]blend=all_mode=difference,format=gbrp10le,eq=gamma=1.4"
+ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a[A];[A]showspectrumpic,format=gbrp10le[AA];amovie=XXX.wav[B];[B]showspectrumpic,format=gbrp10le[BB];[AA][BB]blend=all_mode=difference,eq=gamma=1.4"
 ```
 
 

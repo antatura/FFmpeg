@@ -687,7 +687,11 @@ ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps,format=gbrp10le[A];movie=YYY.mp4,fp
 ### 🥕**音频频谱对比对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic,drawbox=y=2113:t=fill,format=gbrp10le[A];amovie=XXX.wav,showspectrumpic,drawbox=w=iw/2-2050:t=fill,format=gbrp10le[B];[A][B]blend=all_mode=difference"
+ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic,drawbox=y=2113:t=fill,format=rgb24[A];amovie=XXX.wav,showspectrumpic,drawbox=w=iw/2-2050:t=fill,format=rgb24[B];[A][B]blend=all_mode=difference"
+```
+
+```
+ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic,drawbox=y=2113:t=fill,format=rgb24[A];[1:a]showspectrumpic,drawbox=w=iw/2-2050:t=fill,format=rgb24[B];[A][B]blend=all_mode=6" XXX.png
 ```
 
 

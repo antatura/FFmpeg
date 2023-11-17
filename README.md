@@ -38,13 +38,13 @@ ffmpeg -i XXX.mkv -map v:0 -vf trim=start_frame=60:end_frame=65 -f framehash -ha
 
 ### 🥕**VMAF**
 
-- （低泛用性）以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度，帧数量、帧时间与分辨率皆完全相同（默认皆为逐行扫描）：
+- 以下适用于4K屏幕场景，观看距离为1.5倍屏幕高度；记录的帧率可不同，但帧数量与分辨率皆相同（默认皆为逐行扫描）：
 
 ```
 ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v:0 -lavfi libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=16 -f null -
 ```
 
-- （高泛用性）以下适用于1080P屏幕场景，观看距离为3倍屏幕高度，帧未对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
+- 以下适用于1080P屏幕场景，观看距离为3倍屏幕高度；记录的帧率相同，但帧未精确对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
 ```
 ffmpeg -i Main.mp4 -i Refs.mp4 -hide_banner -map v:0 -lavfi "[0:v]fps=source_fps,scale=1920:1080[main];[1:v]fps=source_fps,scale=1920:1080[refs];[main][refs]libvmaf=model=version=vmaf_v0.6.1:n_threads=16:log_fmt=csv:log_path=Main.csv" -f null -
 ```

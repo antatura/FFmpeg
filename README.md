@@ -694,6 +694,8 @@ ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic,drawbox=y=2113:t=fill,
 ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic=s=8192x4096:stop=20000:fscale=log,drawbox=y=4161:t=fill,format=rgb24[A];[1:a]showspectrumpic=s=8192x4096:stop=20000:fscale=log,drawbox=w=iw/2-4098:t=fill,format=rgb24[B];[A][B]blend=all_mode=6,format=rgb24,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
 ```
 
+> 原素材`XXX.wav`不建议从静音开始，否则AAC编码结果`XXX.m4a`的频谱可能出现拉伸或收缩
+
 
 
 

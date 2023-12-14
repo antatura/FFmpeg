@@ -580,6 +580,15 @@ ffmpeg -ss 12:34 -copyts -i XXX.mkv -ss 12:34 -t 56 -vf "subtitles=XXX.srt:force
 
 
 
+### 🥕**Burn PGS Subtitle**
+
+```
+ffmpeg -analyzeduration 100M -probesize 100M -ss 38:10 -t 20 -i XXX.mkv -lavfi "[v:0]setpts=PTS-STARTPTS,pad=3840:2160:(ow-iw)/2:(oh-ih)/2[v1]; [s:0]setpts=PTS-STARTPTS,scale=3840:2160[s1]; [v1][s1]overlay[out]" -map "[out]" -map a:0 YYY.mkv
+```
+
+
+
+
 ### 🥕**为MP4添加srt字幕**
 
 ```

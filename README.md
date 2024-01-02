@@ -592,7 +592,7 @@ ffmpeg -analyzeduration 100M -probesize 100M -ss 38:10 -t 20 -i XXX.mkv -lavfi "
 ### 🥕**为MP4添加srt字幕**
 
 ```
-ffmpeg -i XXX.mp4 -i XXX.srt -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=chs YYY.mp4
+ffmpeg -i XXX.mp4 -i XXX.srt -map 0:v:0 -map 0:a:0 -map 1 -c:v copy -c:a copy -c:s mov_text -metadata:s:s:0 language=chi YYY.mp4
 ```
 
 

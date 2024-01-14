@@ -419,7 +419,7 @@ ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -pix_fmt yuv420p YYY.mp4
 ### 🥕**转换为BT.709有限色彩空间并定义相关标签**
 
 ```
--vf "scale=out_color_matrix=bt709:out_range=tv" -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv 
+-vf zscale=range=limited:matrix=709,format=yuv420p -color_trc bt709 -color_primaries bt709
 ```
 
 

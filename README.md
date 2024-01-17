@@ -230,7 +230,7 @@ ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
 ### 🥕**录制桌面**
 
 ```
-ffmpeg -filter_complex ddagrab=framerate=60,hwdownload,format=bgra,scale=out_color_matrix=bt709:flags=accurate_rnd:out_range=tv -c:v h264_amf -profile:v high -quality balanced -qp_i 14 -qp_p 16 YYY.mp4
+ffmpeg -filter_complex ddagrab=framerate=60,hwdownload,format=bgra,scale=out_color_matrix=bt709:flags=accurate_rnd:out_range=tv -c:v h264_amf -profile:v high -quality balanced -qp_i 12 -qp_p 14 YYY.mkv
 ```
 
 ```

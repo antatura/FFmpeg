@@ -531,14 +531,12 @@ ffmpeg -i XXX.wav -filter_complex "showwavespic=s=1920x1080:split_channels=1" -f
 ### 🥕**绘制音频频谱**
 
 ```
-ffmpeg -i XXX.mp4 -y -v 16 -lavfi showspectrumpic=s=1764x1024:color=fruit:drange=120 X.png; ffplay -v 16 -fs X.png
+ffmpeg -i XXX.mp4 -y -v 16 -lavfi showspectrumpic=s=3584x2048 XXX.png
 ```
-
-> [【示例图】](https://github.com/antatura/FFmpeg/blob/master/Images/spectrogram-q.png)
 
 > https://ffmpeg.org/ffmpeg-filters.html#showspectrumpic
 
-> 高度需为2的幂次方
+> 高度需为2^n; 默认值`4096x2048`可能导致频谱轻微变形
 
 
 
@@ -707,15 +705,12 @@ ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps=source_fps,format=gbrp10le[A];movie
 ### 🥕**音频频谱对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic,drawbox=y=2113:t=fill,format=rgb24[A];amovie=XXX.wav,showspectrumpic,drawbox=w=iw/2-2050:t=fill,format=rgb24[B];[A][B]blend=all_mode=difference"
+ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic=s=3584x2048,drawbox=y=2112:t=fill,format=rgb24[A];amovie=XXX.wav,showspectrumpic=s=3584x2048,drawbox=w=142:t=fill,format=rgb24[B];[A][B]blend=all_mode=difference"
 ```
 
 ```
-ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic=s=8192x4096:stop=20000:fscale=log,drawbox=y=4161:t=fill,format=rgb24[A];[1:a]showspectrumpic=s=8192x4096:stop=20000:fscale=log,drawbox=w=iw/2-4098:t=fill,format=rgb24[B];[A][B]blend=all_mode=6,format=rgb24,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
+ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=y=4160:t=fill,format=rgb24[B];[1:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=w=142:t=fill,format=rgb24[C];[B][C]blend=all_mode=6,format=rgb24,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
 ```
-
-> 若采样率为48000Hz，则AAC时长不可为100秒，否则其频谱可能出现拉伸或收缩`??????`     
-> 若采样率为44100Hz，则AAC时长不可为90秒左右，否则其频谱可能出现拉伸或收缩`??????`
 
 
 

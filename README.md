@@ -541,15 +541,6 @@ ffmpeg -i XXX.mp4 -y -v 16 -lavfi showspectrumpic=s=3584x2048 XXX.png
 
 
 
-### 🥕**本地aac高质量编码**
-
-```
-ffmpeg -i XXX.aac -ar 48000 -b:a 256k -aac_coder 1 -strict -2 -cutoff 24000 YYY.aac
-```
-
-
-
-
 ### 🥕**混音**
 
 ```

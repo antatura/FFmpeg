@@ -696,11 +696,11 @@ ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps=source_fps,format=gbrp10le[A];movie
 ### 🥕**音频频谱对比**
 
 ```
-ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic=s=3584x2048,drawbox=y=2112:t=fill,format=rgb24[A];amovie=XXX.wav,showspectrumpic=s=3584x2048,drawbox=w=142:t=fill,format=rgb24[B];[A][B]blend=all_mode=difference"
+ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,showspectrumpic=s=3584x2048,drawbox=y=2112:t=fill,format=gbrp[B];amovie=XXX.wav,showspectrumpic=s=3584x2048,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=difference"
 ```
 
 ```
-ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=y=4160:t=fill,format=rgb24[B];[1:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=w=142:t=fill,format=rgb24[C];[B][C]blend=all_mode=6,format=rgb24,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
+ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=y=4160:t=fill,format=gbrp[B];[1:a]showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=6,format=gbrp,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
 ```
 
 

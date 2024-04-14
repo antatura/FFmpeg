@@ -254,7 +254,8 @@ ffmpeg -f dshow -i audio="麦克风阵列 (Realtek(R) Audio)" YYY.wav
 ffmpeg -f dshow -i audio="立体声混音 (Realtek(R) Audio)" YYY.wav
 ```   
 
-> 需开启麦克风权限； 播放音量会影响录制音量
+> 录制桌面音频需开启麦克风权限并将声音输入设备改为立体声混音  
+> 播放音量会影响录制音量
 
 
 

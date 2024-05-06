@@ -699,13 +699,13 @@ ffplay -v 16 -fs -f lavfi "movie=XXX.mp4,fps=source_fps,format=gbrp10le[A];movie
 
 对比立体声的FR声道：
 ```
-ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,pan=stereo|c0=c1,showspectrumpic=s=3584x2048,drawbox=y=2112:t=fill,format=gbrp[B];amovie=XXX.wav,pan=stereo|c0=c1,showspectrumpic=s=3584x2048,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=difference"
+ffplay -v 16 -fs -f lavfi "amovie=XXX.m4a,pan=stereo|c0=FR,showspectrumpic=s=3584x2048,drawbox=y=2112:t=fill,format=gbrp[B];amovie=XXX.wav,pan=stereo|c0=FR,showspectrumpic=s=3584x2048,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=difference"
 ```
 
 
 对比5.1(side)的FC声道：
 ```
-ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]pan=5.1(side)|c0=c2,showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=y=4160:t=fill,format=gbrp[B];[1:a]pan=5.1(side)|c0=c2,showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=6,format=gbrp,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
+ffmpeg -v 16 -i XXX.m4a -i XXX.wav -lavfi "[0:a]pan=5.1(side)|c0=FC,showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=y=4160:t=fill,format=gbrp[B];[1:a]pan=5.1(side)|c0=FC,showspectrumpic=s=7226x4096:stop=20000:fscale=log,drawbox=w=142:t=fill,format=gbrp[C];[B][C]blend=all_mode=6,format=gbrp,drawbox=y=1020:h=4:c=yellow,drawbox=y=2660:h=4:c=cyan" XXX.png
 ```
 
 > https://ffmpeg.org/ffmpeg-utils.html#toc-Channel-Layout

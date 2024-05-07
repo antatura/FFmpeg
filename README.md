@@ -394,7 +394,7 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 ### 🥕**导出图片并合并**
 
 ```
-ffmpeg -i XXX.mp4 -vf select='eq(n\,12)',format=gbrp,format=rgb24 YYY.png
+ffmpeg -i XXX.mp4 -vf select='eq(n\,12)',zscale,format=gbrp,format=rgb24 YYY.png
 ```
 
 ```

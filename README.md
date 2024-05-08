@@ -398,9 +398,9 @@ ffmpeg -i XXX.mp4 -vf select='eq(n\,12)',zscale,format=gbrp,format=rgb24 YYY.png
 ```
 
 ```
-ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -sws_flags accurate_rnd+full_chroma_int+bitexact YYY_%3d.png
+ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -vf zscale,format=gbrp,format=rgb24 YYY_%3d.png
 ```
-
+ 
 ```
 ffmpeg -framerate 30 -i YYY_%3d.png -c copy YYY.mkv
 ```

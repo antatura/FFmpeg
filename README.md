@@ -391,16 +391,13 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 
 
 
-### 🥕**导出图片并合并**
+### 🥕**导出图片**
 
 
 ```
 ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -vf zscale,format=gbrp,format=rgb24 YYY_%3d.png
 ```
- 
-```
-ffmpeg -framerate 30 -i YYY_%3d.png -c copy YYY.mkv
-```
+
 
 
 

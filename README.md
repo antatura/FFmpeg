@@ -50,7 +50,10 @@ ffmpeg -i Main.mp4 -i Refs.mp4 -hide_banner -map v:0 -lavfi "[0:v]fps=source_fps
 ```
 
 - 用Powershell计算 1% Low of VMAF
-`$csv = Import-Csv Main.csv; ([double[]]$csv.vmaf | sort | select -First ($csv.Count/100) | measure -AllStats).Average`
+
+```
+$csv = Import-Csv Main.csv; ([double[]]$csv.vmaf | sort | select -First ($csv.Count/100) | measure -AllStats).Average
+```
 
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/
 

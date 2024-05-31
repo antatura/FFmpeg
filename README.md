@@ -49,6 +49,9 @@ ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v:0 -lavfi libvmaf=model=version=v
 ffmpeg -i Main.mp4 -i Refs.mp4 -hide_banner -map v:0 -lavfi "[0:v]fps=source_fps,scale=1920:1080[main];[1:v]fps=source_fps,scale=1920:1080[refs];[main][refs]libvmaf=model=version=vmaf_v0.6.1:n_threads=16:log_fmt=csv:log_path=Main.csv" -f null -
 ```
 
+- 用Powershell计算 1% Low of VMAF
+`$csv = Import-Csv Main.csv; ([double[]]$csv.vmaf | sort | select -First ($csv.Count/100) | measure -AllStats).Average`
+
 > https://blog.otterbro.com/how-to-vmaf-ffmpeg/
 
 > https://github.com/Netflix/vmaf

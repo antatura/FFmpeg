@@ -86,9 +86,11 @@ ffmpeg -i XXX.mov -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1
 ffmpeg -i XXX.ffcat -c copy .\XXX-C.mov  
 ```
 
-> 适合 MPEG CFR; 每17秒切一刀; 切片首帧为关键帧
+> 适合 MPEG CFR; 以上命令每17秒切一刀; 切片首帧为关键帧
   
 > `-segment_times 13,18,55` 以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧
+
+> 保持对某一片段重编码后的拼接完整性：`-pix_fmt yuv420p -crf 1 -preset 1`
 
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 

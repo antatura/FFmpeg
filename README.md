@@ -124,7 +124,7 @@ ffmpeg -ss 00:00:18.000 -t 15 -i XXX.mp4 -c copy -avoid_negative_ts 1 YYY.mp4
 
 > `-avoid_negative_ts 1`: 从指定起始位置的上一关键帧开始裁切，末端或有缺失帧，起始时间戳或略大于零
 
-> 若输出容器格式为mkv，可省略`-avoid_negative_ts 1`
+> 若输出容器格式为mkv，可省略`-avoid_negative_ts 1`; 但mkv默认时间精度为 1k tbn ，较低不适合作为抽取的目标容器
 
 > 若`to`位于`[input]`之后，则视为时间段`t`
 

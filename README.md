@@ -44,9 +44,10 @@ ffmpeg -i XXX.mkv -map v:0 -vf trim=start_frame=60:end_frame=65 -f framehash -ha
 ffmpeg -r 1 -i Main.mp4 -r 1 -i Refs.mp4 -map v:0 -lavfi [0:v][1:v]libvmaf=model=version=vmaf_4k_v0.6.1:n_threads=16 -f null -
 ```
 
-- 以下适用于1080P屏幕场景，观看距离为3倍屏幕高度；记录的帧率相同，但帧未精确对齐、分辨率未匹配的情况，并生成CSV文件以供分析：
+- 以下适用于1080P屏幕场景，观看距离为3倍屏幕高度；记录的帧率可不同，帧未精确对齐、无黑边的情况，并生成CSV文件以供分析：
+
 ```
-ffmpeg -i Main.mp4 -i Refs.mp4 -hide_banner -map v:0 -lavfi "[0:v]fps=source_fps,scale=1920:1080[main];[1:v]fps=source_fps,scale=1920:1080[refs];[main][refs]libvmaf=model=version=vmaf_v0.6.1:n_threads=16:log_fmt=csv:log_path=Main.csv" -f null -
+ffmpeg -r 1 -i Mian.mp4 -r 1 -i Refs.mp4 -hide_banner -map_chapters -1 -map_metadata -1 -an -sn -dn -lavfi "[0:v:0]trim=start_frame=5000:end_frame=15000,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,zscale=min=709:rin=limited[main];[1:v:0]trim=start_frame=5000:end_frame=15000,pad=1920:1080:(ow-iw)/2:(oh-ih)/2,zscale=min=709:rin=limited[refs];[main][refs]libvmaf=model=version=vmaf_v0.6.1:n_threads=16:log_fmt=csv:log_path=Main.csv" -f null -
 ```
 
 - 用Powershell计算 1% Low of VMAF

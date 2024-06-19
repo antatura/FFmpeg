@@ -97,6 +97,15 @@ ffmpeg -i XXX.ffcat -c copy -video_track_timescale 15360 .\XXX-C.mp4
 
 
 
+### 🥕**Trim**
+
+```
+ffmpeg -i XXX.m2ts -map v:0 -vf trim=start_frame=5000:end_frame=15000,setpts=PTS-STARTPTS,fps=24000/1001,crop=1920:800 -preset 0 -qp 0 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv YYY.mp4
+```
+
+
+
+
 ### 🥕**合并多条视频分段**
 
 ```

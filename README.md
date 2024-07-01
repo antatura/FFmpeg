@@ -413,7 +413,7 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 
 
 ```
-ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -vf format=gbrp,format=bgr24 YYY_%3d.bmp
+ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -vf format=gbrp16le,format=bgr24 YYY_%3d.bmp
 ```
 
 

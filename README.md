@@ -413,7 +413,7 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 
 
 ```
-ffmpeg -ss 10 -colorspace bt709 -i XXX.mp4 -update 1 -frames:v 120 -vf format=yuv444p16le,format=bgr24 YYY_%3d.bmp
+ffmpeg -ss 10 -i XXX.mp4 -frames:v 120 -vf scale=in_color_matrix=bt709:flags=accurate_rnd+full_chroma_int+bitexact,format=bgr24 YYY_%3d.bmp
 ```
 
 

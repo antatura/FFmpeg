@@ -663,7 +663,7 @@ ffprobe -v 8 -count_frames -select_streams v:0 -skip_frame nokey -show_entries s
 ### 🥕**获取01:25:31前一个关键帧**
 
 ```
-ffprobe -i XXX.mkv -show_frames -read_intervals 01:25:31%+#1
+ffprobe -read_intervals 01:25:31%+#1 -show_entries frame=key_frame,pts_time -of json -v 16 XXX.mkv
 ```
 
 

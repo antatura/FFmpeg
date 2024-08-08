@@ -674,7 +674,7 @@ ffprobe -read_intervals 01:25:31%+#1 -show_entries frame=key_frame,pts_time -of 
 ffprobe -v 16 -f lavfi movie=XXX.mp4,trim=start=20:end=40,signalstats -show_entries frame=pts_time:frame_tags=lavfi.signalstats.YAVG -of csv=p=0 >YAVG.csv; $Data = Import-Csv YAVG.csv -Header pts_time,YAVG; $Data | Export-Csv YAVG.csv -NoTypeInformation
 ```
 
-> https://www.csvplot.com/
+> https://www.csvplot.com/   
 
 
 

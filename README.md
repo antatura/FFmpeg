@@ -413,7 +413,7 @@ ffmpeg -i XXX.mp4 -i XXXX.mp4 -filter_complex "overlay=x='if(gte(t,2), -w+(t-2)*
 
 
 ```
-ffmpeg -i XXX.mkv -map v:0 -vf select='not(mod(n\,2143))',crop=1920:800,scale=in_color_matrix=bt709:flags=accurate_rnd+full_chroma_int+bitexact,format=rgb24 -fps_mode passthrough -pred 2 -frame_pts 1 -v 16 -stats Frame.%06d.png
+ffmpeg -colorspace bt709 -i XXX.mkv -sws_flags accurate_rnd+full_chroma_int+bitexact -map v:0 -vf select='not(mod(n\,2143))',crop=1920:800,format=rgb24 -fps_mode passthrough -pred 2 -frame_pts 1 -v 16 -stats Frame.%06d.png
 ```
 
 

@@ -248,7 +248,7 @@ ffmpeg -i 30fps.mp4 -lavfi "setpts=0.5*PTS;atempo=2" -r 60 60fps.mp4
 ### 🥕**录制桌面**
 
 ```
-ffmpeg -filter_complex ddagrab=framerate=60,hwdownload,format=bgra,scale=out_color_matrix=bt709:out_range=tv:flags=accurate_rnd+full_chroma_int+bitexact+lanczos -c:v h264_amf -profile:v high -quality balanced -qp_i 12 -qp_p 14 YYY.mkv
+ffmpeg -filter_complex ddagrab=framerate=60,hwdownload,format=bgra,setparams=range=tv:colorspace=bt709:color_trc=bt709:color_primaries=bt709,scale=flags=accurate_rnd+full_chroma_int+bitexact+lanczos,format=yuv420p -c:v h264_amf -profile:v high -quality balanced -qp_i 12 -qp_p 12 YYY.mkv
 ```
 
 ```
@@ -423,7 +423,7 @@ ffmpeg -colorspace bt709 -i XXX.mkv -sws_flags accurate_rnd+full_chroma_int+bite
 ### 🥕**创建仅包含图像的视频**
 
 ```
-ffmpeg -loop 1 -framerate FPS -t 5 -i XXX.png -pix_fmt yuv420p YYY.mp4
+ffmpeg -loop 1 -t 60 -framerate 30 -i XXX.bmp -vf setparams=range=tv:colorspace=bt709:color_trc=bt709:color_primaries=bt709,scale=flags=accurate_rnd+full_chroma_int+bitexact+lanczos,format=yuv420p YYY.mp4
 ```
 
 

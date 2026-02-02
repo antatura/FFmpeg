@@ -444,7 +444,8 @@ ffmpeg -loop 1 -t 60 -framerate 30 -i XXX.bmp -vf setparams=range=tv:colorspace=
 -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p,zscale=1920:-2
 ```
 
-> 应用libplacebo的升级版（推荐）
+
+> 使用libplacebo的升级版（推荐）
 
 ```
 -vf libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p:w=1920:h=-2,sidedata=delete
@@ -771,6 +772,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

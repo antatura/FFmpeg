@@ -80,28 +80,26 @@ Get-ChildItem *.jpg | ForEach-Object { ffmpeg -i $_.Name -lossless 1 "$($_.BaseN
 
 
 
-### 🥕**切片与拼接**
+### 🥕**切片与拼接（非重编码，精确到关键帧）**
 
 ```
-ffmpeg -i XXX.mkv -map 0 -c copy -f segment -segment_time 17 -reset_timestamps 1 -segment_list XXX.ffcat XXX_%3d.mp4  
+ffmpeg -i XXX.mkv -map 0 -c copy -f segment -segment_time 10 -reset_timestamps 1 -segment_list XXX.ffcat XXX_%3d.mp4  
 ffmpeg -i XXX.ffcat -c copy -video_track_timescale 15360 .\XXX-C.mp4  
 ```
 
-> 适合 MPEG CFR; 以上命令每17秒切一刀; 切片首帧为关键帧
-  
-> `-segment_times 13,18,55` 以每个时间点之后的关键帧为切割点，若切割时间点与上一个相同，则顺延到下一个关键帧
+> 适合 MPEG CFR; 需指定 `-c copy` ，切割时间点将顺延至下一关键帧。
 
-> 保持对某一片段重编码后的拼接完整性：`-pix_fmt yuv420p -crf 1 -preset 1`
+> `-segment_time 10` 等效于 `-segment_times 10,20,30,40,50`
 
 > http://ffmpeg.org/ffmpeg-formats.html#segment_002c-stream_005fsegment_002c-ssegment
 
 
 
 
-### 🥕**Trim**
+### 🥕**重组视频（重编码，精确到帧）**
 
 ```
-ffmpeg -i XXX.m2ts -map v:0 -vf trim=start_frame=5000:end_frame=15000,setpts=PTS-STARTPTS,fps=24000/1001,crop=1920:800 -preset 0 -qp 0 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv YYY.mp4
+ffmpeg -i XXX.mkv -lavfi "[v:0]trim=0:10,setpts=PTS-STARTPTS[v1];[a:0]atrim=0:10,asetpts=PTS-STARTPTS[a1];[v:0]trim=30:40,setpts=PTS-STARTPTS[v2];[a:0]atrim=30:40,asetpts=PTS-STARTPTS[a2];[v:0]trim=50,setpts=PTS-STARTPTS[v3];[a:0]atrim=50,asetpts=PTS-STARTPTS[a3];[v1][a1][v2][a2][v3][a3]concat=n=3:v=1:a=1[v][a]" -map "[v]" -map "[a]" -crf 16 -c:a alac YYY.mov
 ```
 
 
@@ -772,6 +770,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

@@ -418,11 +418,24 @@ ffmpeg -colorspace bt709 -i XXX.mkv -sws_flags accurate_rnd+full_chroma_int+bite
 
 
 
-### 🥕**创建仅包含图像的视频**
+### 🥕**从单一图片创建视频 (FFmpeg 8.0+)**
+
+> 方案一：scale
 
 ```
-ffmpeg -loop 1 -t 60 -framerate 30 -i XXX.bmp -vf setparams=range=tv:colorspace=bt709:color_trc=bt709:color_primaries=bt709,scale=flags=accurate_rnd+full_chroma_int+bitexact+lanczos,format=yuv420p YYY.mp4
+ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf scale=out_color_matrix=bt709:out_primaries=bt709:out_transfer=bt709:out_range=tv:flags=accurate_rnd+full_chroma_int+bitexact+lanczos,format=yuv420p YYY.mp4
 ```
+
+> 方案二：libplacebo
+
+```
+ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p,sidedata=delete YYY.mp4
+```
+
+方案一对比方案二：
+质量：总体相似
+性能：scale强于libplacebo (scale: 解码50s+滤镜8s; libplacebo: 解码50s+滤镜30s)
+
 
 
 
@@ -770,6 +783,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

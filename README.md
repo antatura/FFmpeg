@@ -440,13 +440,6 @@ ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf libplacebo=colorspace=bt709:co
 
 
 
-### 🥕**转换为BT.709有限色彩空间并定义相关标签**
-
-```
--vf zscale=range=limited:matrix=709,format=yuv420p -color_trc bt709 -color_primaries bt709
-```
-
-
 
 
 ### 🥕**HEVC.4K.HDR.10bit >>> x264.1080p.SDR.8bit**
@@ -783,6 +776,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

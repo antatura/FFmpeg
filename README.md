@@ -433,7 +433,9 @@ ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf libplacebo=colorspace=bt709:co
 ```
 
 方案一对比方案二：
+
 质量：总体相似
+
 性能：scale强于libplacebo (scale: 解码50s+滤镜8s; libplacebo: 解码50s+滤镜30s)
 
 
@@ -776,6 +778,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

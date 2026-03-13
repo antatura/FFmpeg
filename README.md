@@ -429,7 +429,7 @@ ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf scale=out_color_matrix=bt709:o
 > 方案二：libplacebo
 
 ```
-ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=yuv420p,sidedata=delete YYY.mp4
+ffmpeg -loop 1 -framerate 30 -t 60 -i XXX.bmp -vf libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:dithering=none:format=yuv420p,sidedata=delete YYY.mp4
 ```
 
 方案一对比方案二：
@@ -776,6 +776,7 @@ metaflac --import-tags-from=FlacTags.txt --import-picture-from=cover.jpg XXX.fla
 > https://xiph.org/flac/documentation_tools_metaflac.html
 
 > [Vorbis注释规范](https://xiph.org/vorbis/doc/v-comment.html)
+
 
 
 

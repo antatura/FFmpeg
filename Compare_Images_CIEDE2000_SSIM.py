@@ -1,5 +1,6 @@
-
-# Compare_Images_CIEDE2000_SSIM.py  [2026.03.13]
+# Name                : Compare_Images_CIEDE2000_SSIM.py
+# CreationTime        : 2026.03.13 14:39:07
+# LastWriteTime       : 2026.03.14 18:50:02
 
 
 

@@ -1,3 +1,7 @@
+# Name                : CaptureFrames.ps1
+# CreationTime        : 2026.02.05 21:03:41
+# LastWriteTime       : 2026.03.13 00:07:03
+
 
 #Requires -Version 5.1
 

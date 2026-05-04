@@ -1,12 +1,17 @@
-#!/usr/bin/env python3
-#
 # https://github.com/zeroepoch/plotbitrate
 #
 # Requirements:
-#           FFmpeg, FFprobe
-#           Python 3.9 3.10
+#           FFmpeg.exe, FFprobe.exe
+#           Python 3.9  3.10
 #           pip install matplotlib
-#
+#           pip install PyQt5
+#   
+# Name                : p.py        
+# CreationTime        : 2023.10.10 00:22:29
+# LastWriteTime       : 2026.05.04 16:15:28
+
+
+#!/usr/bin/env python3
 #
 # FFProbe Bitrate Graph
 #
@@ -50,9 +55,11 @@ except ImportError:
 # check for matplot lib
 try:
     import numpy
+    import matplotlib
+    matplotlib.use("Qt5Agg")
     import matplotlib.pyplot as matplot
 except ImportError:
-    sys.stderr.write("Error: Missing package 'python3-matplotlib'\n")
+    sys.stderr.write("Error: Missing package 'matplotlib' or 'PyQt5'\n")
     sys.exit(1)
 
 # check for ffprobe in path

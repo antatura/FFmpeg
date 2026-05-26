@@ -1,6 +1,6 @@
 # Name                : CaptureFrames.ps1
 # CreationTime        : 2026.02.05 21:03:41
-# LastWriteTime       : 2026.03.13 00:07:03
+# LastWriteTime       : 2026.05.26 11:23:51
 
 
 #Requires -Version 5.1
@@ -15,7 +15,7 @@ param
     [ValidateRange(1,9999)][int]$Segment_Count = 12,
     [ValidateRange(1,64)][int]$Tile_COLUMNS = 3,
     [ValidateRange(1,64)][int]$Tile_ROWS = 8,
-    [ValidateRange(256,16384)][int]$Tile_Width = 3840,
+    [ValidateRange(256,16000)][int]$Tile_Width = 3840,
     [ValidateRange(1,[int]::MaxValue)][int]$Frame_Interval,
     [string]$Frame_Crop,
     [ValidateSet('4:2:0','4:4:4')][string]$JPEG_Sampling_Factor = '4:2:0',
@@ -52,7 +52,7 @@ function Invoke-NewFile
 }
 
 
-function Invoke-Loop-Segment-BMP
+function Invoke-LoopSegmentBMP
 {
     for ($i=1; $i -le $Segment_Count; $i++) 
     {
@@ -81,7 +81,7 @@ function Invoke-Loop-Segment-BMP
         if (!($NewBMP.Count -eq $i))
         {
             $Stats.ForEach({Invoke-Warning $_})
-            Invoke-Warning "`n===>  An error occurred as described above."
+            Invoke-Warning "`n>>>>  An error occurred as described above."
             return
         }       
     }
@@ -92,7 +92,7 @@ function Invoke-Loop-Segment-BMP
 
 if (!($Video))
 {
-    Invoke-Warning "`n===>  Run 'Get-Help CaptureFrames.ps1' to get help"
+    Invoke-Warning "`n>>>>  Run 'Get-Help CaptureFrames.ps1' to get help"
     return
 }
 
@@ -109,19 +109,19 @@ if (Get-Command ffmpeg)
 
         if ($GCC_Version -lt [version]'14.2.0')
         {
-            Invoke-Warning "`n===>  Requirement: FFmpeg 7.1.1 or later (gcc 14.2.0 or later)  https://www.gyan.dev/ffmpeg/builds/"
+            Invoke-Warning "`n>>>>  Requirement: FFmpeg 7.1.1 or later (gcc 14.2.0 or later)  https://www.gyan.dev/ffmpeg/builds/"
             return
         }
     }
     else
     {
-        Invoke-Warning "`n===>  ???: $($GCC)"
+        Invoke-Warning "`n>>>>  ???: $($GCC)"
         return
     }
 }
 else
 {
-    Invoke-Warning "`n===>  Requirement: FFmpeg.exe  https://www.gyan.dev/ffmpeg/builds/"
+    Invoke-Warning "`n>>>>  Requirement: FFmpeg.exe  https://www.gyan.dev/ffmpeg/builds/"
     return
 }
 
@@ -130,7 +130,7 @@ else
 
 if (($Format -eq 'JPEG') -and !(Get-Command magick))
 {
-    Invoke-Warning "`n===>  Requirement: Magick.exe  https://imagemagick.org/script/download.php#windows"
+    Invoke-Warning "`n>>>>  Requirement: Magick.exe  https://imagemagick.org/script/download.php#windows"
     return
 }
 
@@ -171,24 +171,44 @@ if (Get-Command ffprobe)
         }
 
         [int]$Video_Width = ([array](ffprobe -v -8 -select_streams v:0 -show_entries stream=width -of default=nk=1:nw=1 $Video))[0]
+        [int]$Video_Height = ([array](ffprobe -v -8 -select_streams v:0 -show_entries stream=height -of default=nk=1:nw=1 $Video))[0]
+
 
         if (!($Duration -and $Framerate -and $Video_Width))
         {
-            Invoke-Warning "`n===>  Failed to get info for Duration, Framerate, or Video_Width."
+            Invoke-Warning "`n>>>>  Failed to get info for Duration, Framerate, or Video_Width."
             return
         }
     }
     else
     {
-        Invoke-Warning "`n===>  The input file is required to contain at least one video stream."
+        Invoke-Warning "`n>>>>  The input file is required to contain at least one video stream."
         return
     }
 }
 else
 {
-    Invoke-Warning "`n===>  Requirement: FFprobe.exe  https://www.gyan.dev/ffmpeg/builds/"
+    Invoke-Warning "`n>>>>  Requirement: FFprobe.exe  https://www.gyan.dev/ffmpeg/builds/"
     return
 }
+
+
+
+
+if ($Mode -eq 'Tile')
+{
+    if (($Tile_COLUMNS*$Video_Width -gt 16000) -or ($Tile_ROWS*$Video_Height -gt 16000))
+    {
+        Invoke-Warning "`n>>>>  Requirement: Tile_COLUMNS <= $([math]::Floor(16000/$Video_Width))"
+        Invoke-Warning "`n>>>>  Requirement: Tile_ROWS <= $([math]::Floor(16000/$Video_Height))"
+        return
+    }
+}
+
+
+
+
+
 
 
 
@@ -201,16 +221,16 @@ catch { Set-Location -LiteralPath $Destination -ErrorAction Stop }
 
 if ($Mode -eq 'Segment')
 {
-    Invoke-Loop-Segment-BMP
+    Invoke-LoopSegmentBMP
 }
 
 
 
 
 if ($Mode -eq 'Tile')
-{
+{ 
     $Segment_Count = $Tile_COLUMNS*$Tile_ROWS
-    Invoke-Loop-Segment-BMP
+    Invoke-LoopSegmentBMP
 
     [array]$NewBMP = Invoke-NewFile
 
@@ -222,8 +242,7 @@ if ($Mode -eq 'Tile')
         
     }
     
-    $NewBMP | Remove-Item      
-
+    $NewBMP | Remove-Item 
 }
 
 
@@ -272,15 +291,15 @@ if ($Mode -eq 'Frame')
         {
             $NewBMP | Remove-Item -ErrorAction SilentlyContinue
             $Stats.ForEach({Invoke-Warning $_})
-            Invoke-Warning "`n===>  An error occurred as described above."
-            Invoke-Warning "`n===>  Examples:  [-Frame_Crop 1920:800:0:140]  [-Frame_Crop 1920:800]  https://ffmpeg.org/ffmpeg-all.html#crop"
+            Invoke-Warning "`n>>>>  An error occurred as described above."
+            Invoke-Warning "`n>>>>  Examples:  [-Frame_Crop 1920:800:0:140]  [-Frame_Crop 1920:800]  https://ffmpeg.org/ffmpeg-all.html#crop"
 
         }
     }
     else
     {
-        Invoke-Warning "`n===>  Requirement: [Frame_Interval]"
-        Invoke-Warning "`n===>  Reference: The total number of frames in the video is estimated to be [$([int]($Duration*$Framerate))]."
+        Invoke-Warning "`n>>>>  Requirement: [Frame_Interval]"
+        Invoke-Warning "`n>>>>  Reference: The total number of frames in the video is estimated to be [$([int]($Duration*$Framerate))]."
     }
 }
 

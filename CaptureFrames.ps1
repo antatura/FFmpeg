@@ -1,6 +1,7 @@
 # Name                : CaptureFrames.ps1
 # CreationTime        : 2026.02.05 21:03:41
-# LastWriteTime       : 2026.05.26 11:23:51
+# LastWriteTime       : 2026.06.02 16:37:10
+# ChangeLog           : drawtext
 
 
 #Requires -Version 5.1
@@ -46,10 +47,14 @@ function Invoke-Warning
 }
 
 
+
+
 function Invoke-NewFile
 {
     Get-Item *.* | Where-Object LastWriteTime -gt $Date_Beginning
 }
+
+
 
 
 function Invoke-LoopSegmentBMP
@@ -62,16 +67,16 @@ function Invoke-LoopSegmentBMP
 
         if (!($NoTimestamp))
         {
-            $SS_Date = "{0:hh}\\:{0:mm}\\:{0:ss}.{0:fff}" -f [timespan]::fromseconds($SS)
-            $TEXT_Filter = "drawtext=fontfile=C\\:/Windows/fonts/consola.ttf:text=$($SS_Date):x=H/50:y=H-th-x:fontsize=H/25:box=1:boxcolor=Black:fontcolor=White:boxborderw=5"
+            $SS_Date = ("{0:hh\:mm\:ss\.fff}" -f [timespan]::fromseconds($SS)).Replace(':','\:')
+            $TEXT_Filter = "drawtext=fontfile='C\:/Windows/fonts/consola.ttf':text='$($SS_Date)':x=H/50:y=H-th-x:fontsize=H/25:box=1:boxcolor=Black:fontcolor=White:boxborderw=10"
         }
         
 
         $Stats = [System.Collections.ArrayList]::new()
 
         # $ErrorActionPreference = 'Continue'
-        ffmpeg -init_hw_device vulkan -ss $SS -i $Video -y -hide_banner -nostats -map_chapters -1 -map_metadata -1 -map v:0 -frames:v 1 `
-        -vf "libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:format=bgr24,sidedata=delete,showinfo,$($TEXT_Filter)" `
+        ffmpeg -ss $SS -i $Video -y -hide_banner -nostats -map_chapters -1 -map_metadata -1 -map v:0 -frames:v 1 `
+        -vf "libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:w=$($BMP_Width):h=-2:format=bgr24,sidedata=delete,showinfo,$($TEXT_Filter)" `
         "$($Fresh_Name)__$($i_D4).bmp" *>&1 | ForEach-Object { $Stats.Add([string]$_) | Out-Null }
         # $ErrorActionPreference = 'Stop'
  
@@ -80,6 +85,7 @@ function Invoke-LoopSegmentBMP
 
         if (!($NewBMP.Count -eq $i))
         {
+            $NewBMP | Remove-Item -ErrorAction SilentlyContinue
             $Stats.ForEach({Invoke-Warning $_})
             Invoke-Warning "`n>>>>  An error occurred as described above."
             return
@@ -107,9 +113,9 @@ if (Get-Command ffmpeg)
     {
         $GCC_Version = [version]$matches[0]
 
-        if ($GCC_Version -lt [version]'14.2.0')
+        if ($GCC_Version -lt [version]'15.2.0')
         {
-            Invoke-Warning "`n>>>>  Requirement: FFmpeg 7.1.1 or later (gcc 14.2.0 or later)  https://www.gyan.dev/ffmpeg/builds/"
+            Invoke-Warning "`n>>>>  Requirement: FFmpeg 8.0 or later (gcc 15.2.0 or later)  https://www.gyan.dev/ffmpeg/builds/"
             return
         }
     }
@@ -156,7 +162,6 @@ if (Get-Command ffprobe)
         catch
         {
             [double]$Duration = ([array](ffprobe -v -8 -show_entries format=duration -of default=nk=1:nw=1 $Video))[0]
-
         }
 
         try
@@ -195,19 +200,6 @@ else
 
 
 
-if ($Mode -eq 'Tile')
-{
-    if (($Tile_COLUMNS*$Video_Width -gt 16000) -or ($Tile_ROWS*$Video_Height -gt 16000))
-    {
-        Invoke-Warning "`n>>>>  Requirement: Tile_COLUMNS <= $([math]::Floor(16000/$Video_Width))"
-        Invoke-Warning "`n>>>>  Requirement: Tile_ROWS <= $([math]::Floor(16000/$Video_Height))"
-        return
-    }
-}
-
-
-
-
 
 
 
@@ -221,6 +213,7 @@ catch { Set-Location -LiteralPath $Destination -ErrorAction Stop }
 
 if ($Mode -eq 'Segment')
 {
+    $BMP_Width = $Video_Width
     Invoke-LoopSegmentBMP
 }
 
@@ -229,20 +222,30 @@ if ($Mode -eq 'Segment')
 
 if ($Mode -eq 'Tile')
 { 
-    $Segment_Count = $Tile_COLUMNS*$Tile_ROWS
-    Invoke-LoopSegmentBMP
+    $Padding = 8
 
-    [array]$NewBMP = Invoke-NewFile
+    $Tile_Width = [math]::Min(($Video_Width+$Padding)*$Tile_COLUMNS-$Padding,$Tile_Width)
+    $BMP_Width =[math]::Floor(($Tile_Width-($Tile_COLUMNS-1)*$Padding)/$Tile_COLUMNS/2)*2
 
-    if ($NewBMP.Count -eq $Segment_Count)
+    $BMP_Height = [math]::Ceiling($BMP_Width/$Video_Width*$Video_Height/2)*2
+    $Tile_Height = ($BMP_Height+$Padding)*$Tile_ROWS-$Padding
+
+    if ($Tile_Height -le 16000)
     {
-        $Tile_Width = [math]::Min(($Video_Width+8)*$Tile_COLUMNS-8,$Tile_Width)
+        $Segment_Count = $Tile_COLUMNS*$Tile_ROWS
+        Invoke-LoopSegmentBMP
 
-        ffmpeg -y -v -8 -i "$($Fresh_Name)__%04d.bmp" -vf "tile=layout=$($Tile_COLUMNS)x$($Tile_ROWS):padding=8,libplacebo=w=$($Tile_Width):h=-2" "Tile__$($Fresh_Name).bmp"
+        [array]$NewBMP = Invoke-NewFile
+
+        ffmpeg -y -v -8 -i "$($Fresh_Name)__%04d.bmp" -vf "tile=layout=$($Tile_COLUMNS)x$($Tile_ROWS):padding=$($Padding),format=bgr24" "Tile__$($Fresh_Name).bmp"
         
+        $NewBMP | Remove-Item -ErrorAction SilentlyContinue
     }
-    
-    $NewBMP | Remove-Item 
+    else 
+    {
+        Invoke-Warning "`n>>>>  When       : Tile_COLUMNS = $($Tile_COLUMNS)"
+        Invoke-Warning "`n>>>>  Requirement: Tile_ROWS <= $([math]::Floor((16000+$Padding)/($BMP_Height+$Padding)))"
+    }
 }
 
 
@@ -261,8 +264,8 @@ if ($Mode -eq 'Frame')
         $Stats = [System.Collections.ArrayList]::new()
 
         # $ErrorActionPreference = 'Continue'
-        ffmpeg -init_hw_device vulkan -i $Video -y -hide_banner -nostats -map_chapters -1 -map_metadata -1 -map v:0 `
-        -vf "select=not(mod(n\,$($Frame_Interval))),libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:format=bgr24,sidedata=delete,showinfo,$($Crop_Filter)" `
+        ffmpeg -i $Video -y -hide_banner -nostats -map_chapters -1 -map_metadata -1 -map v:0 `
+        -vf "select=not(mod(n\,$($Frame_Interval))),libplacebo=colorspace=bt709:color_primaries=bt709:color_trc=bt709:range=tv:format=bgr24,sidedata=delete,showinfo,$($Crop_Filter)" `
         -fps_mode passthrough -frame_pts 1 Frame.%06d.bmp *>&1 | ForEach-Object { $Stats.Add([string]$_) | Out-Null }
         # $ErrorActionPreference = 'Stop'
 

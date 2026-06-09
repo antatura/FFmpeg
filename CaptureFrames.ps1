@@ -1,7 +1,7 @@
 # Name                : CaptureFrames.ps1
 # CreationTime        : 2026.02.05 21:03:41
-# LastWriteTime       : 2026.06.02 16:37:10
-# ChangeLog           : drawtext
+# LastWriteTime       : 2026.06.07 11:37:04
+# ChangeLog           : resume
 
 
 #Requires -Version 5.1
@@ -49,9 +49,9 @@ function Invoke-Warning
 
 
 
-function Invoke-NewFile
+function Invoke-NewBMPFile
 {
-    Get-Item *.* | Where-Object LastWriteTime -gt $Date_Beginning
+    Get-Item *.bmp | Where-Object LastWriteTime -gt $Date_Beginning
 }
 
 
@@ -67,8 +67,9 @@ function Invoke-LoopSegmentBMP
 
         if (!($NoTimestamp))
         {
+            [int]$Box_Boder = $Video_Height/100
             $SS_Date = ("{0:hh\:mm\:ss\.fff}" -f [timespan]::fromseconds($SS)).Replace(':','\:')
-            $TEXT_Filter = "drawtext=fontfile='C\:/Windows/fonts/consola.ttf':text='$($SS_Date)':x=H/50:y=H-th-x:fontsize=H/25:box=1:boxcolor=Black:fontcolor=White:boxborderw=10"
+            $TEXT_Filter = "drawtext=fontfile='C\:/Windows/fonts/consola.ttf':text='$($SS_Date)':x=H/50:y=H-th-x:fontsize=H/25:box=1:boxcolor=Black:fontcolor=White:boxborderw=$($Box_Boder)"
         }
         
 
@@ -81,7 +82,7 @@ function Invoke-LoopSegmentBMP
         # $ErrorActionPreference = 'Stop'
  
 
-        [array]$NewBMP = Invoke-NewFile
+        [array]$NewBMP = Invoke-NewBMPFile
 
         if (!($NewBMP.Count -eq $i))
         {
@@ -235,9 +236,9 @@ if ($Mode -eq 'Tile')
         $Segment_Count = $Tile_COLUMNS*$Tile_ROWS
         Invoke-LoopSegmentBMP
 
-        [array]$NewBMP = Invoke-NewFile
+        [array]$NewBMP = Invoke-NewBMPFile
 
-        ffmpeg -y -v -8 -i "$($Fresh_Name)__%04d.bmp" -vf "tile=layout=$($Tile_COLUMNS)x$($Tile_ROWS):padding=$($Padding),format=bgr24" "Tile__$($Fresh_Name).bmp"
+        ffmpeg -y -v -8 -i "$($Fresh_Name)__%04d.bmp" -vf "tile=layout=$($Tile_COLUMNS)x$($Tile_ROWS):padding=$($Padding)" "Tile__$($Fresh_Name).bmp"
         
         $NewBMP | Remove-Item -ErrorAction SilentlyContinue
     }
@@ -272,7 +273,7 @@ if ($Mode -eq 'Frame')
 
         [array]$Showinfo = $Stats | Where-Object { $_.Contains('showinfo') -and $_.Contains('type:') }
 
-        [array]$NewBMP = Invoke-NewFile
+        [array]$NewBMP = Invoke-NewBMPFile
 
         if (($NewBMP) -and ($NewBMP.Count -eq $Showinfo.Count))
         {
@@ -309,7 +310,7 @@ if ($Mode -eq 'Frame')
 
 
 
-[array]$NewBMP = Invoke-NewFile
+[array]$NewBMP = Invoke-NewBMPFile
 
 if ($NewBMP)
 {
@@ -322,14 +323,14 @@ if ($NewBMP)
     {
         $NewBMP | ForEach-Object { magick $_.Name -strip -sampling-factor $JPEG_Sampling_Factor -quality $JPEG_Quality "$($_.BaseName).jpg" }
         $NewBMP | Remove-Item
-        Invoke-NewFile | Select-Object FullName | Format-List
+        Get-Item *.jpg | Where-Object LastWriteTime -gt $Date_Beginning | Select-Object FullName | Format-List
     }
 
     if ($Format -eq 'PNG')
     {
         $NewBMP | ForEach-Object { ffmpeg -y -v 16 -i $_.Name -pred 5 "$($_.BaseName).png" }
         $NewBMP | Remove-Item
-        Invoke-NewFile | Select-Object FullName | Format-List
+        Get-Item *.png | Where-Object LastWriteTime -gt $Date_Beginning | Select-Object FullName | Format-List
     }
 }
 
